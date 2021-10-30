@@ -1,0 +1,8 @@
+Git commands
+
+Add files locally: -git add -A
+Commit files locally: -git commit -m "Commit message"
+
+Commit files on github origin branch main:   git push origin main
+Commit files on github origin branch master: git push origin master
+

@@ -1,5 +1,11 @@
 Covid SwabTest
 
+Clone project: - git clone https://github.com/Yogesh-YRM/Covid-Swabtest.git
+
+create a new file ".env" and paste everything from ".env.example" inside it
+
+import database
+
 Config database: - .env
 
 Migrate database: - php artisan migrate
