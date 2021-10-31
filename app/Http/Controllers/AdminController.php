@@ -14,7 +14,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+
+      /* $data = Admin::latest()->paginate(5);
+
+      return view('admin.adminCrud',compact('data'))->with('i', (request()->input('page', 1) - 1) * 5); */
+
     }
 
     /**
@@ -81,5 +85,10 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         //
+    }
+
+    public function manageAdmins() {
+          $data = Admin::latest()->paginate(5);
+          return view('admin.manageAdmins.adminCrud',compact('data'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 }

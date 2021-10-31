@@ -11,6 +11,7 @@
   </head>
   <body>
 
+      {{-- navbar--}}
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="#">{{ config('app.name') }}</a>
@@ -26,7 +27,7 @@
                         @else
                         @can('role',['admin','editor'])
                             <li class="nav-item">
-                                <a href="{{ route('post') }}" class="nav-link">Data Post</a>
+                               <a href="{{ route('admin.manageAdmins.adminCrud') }}" class="nav-link">Authorized Users</a>
                             </li>
                         @endcan
                         @can('role','admin')
@@ -51,6 +52,8 @@
                 </div>
             </div>
         </nav>
+        {{-- end navbar--}}
+
         <div class="container">
         @yield('content')
         </div>
