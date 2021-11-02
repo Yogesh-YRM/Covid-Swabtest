@@ -2,13 +2,14 @@
 @section('content')
 <div class="jumbotron mt-3">
 
- <div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+
          <div class="col-lg-12 margin-tb">
              <div class="pull-left">
                  <h2>Manage Authorized users</h2>
              </div>
-             <div class="pull-right">
-               {{--  <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Product</a> --}}
+             <div class="text-center">
+               <a class="btn btn-success" href="{{ route('admin.manageAdmins.adminCrud-Create') }}"> Create New User</a>
              </div>
          </div>
      </div>

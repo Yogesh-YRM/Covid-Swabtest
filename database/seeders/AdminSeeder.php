@@ -29,9 +29,9 @@ class AdminSeeder extends Seeder
         ]);
 
         Admin::create([
-            'name'     => 'Operator',
-            'email'    => 'operator@localhost.com',
-            'role'    => 'operator',
+            'name'     => 'Gerard Pique',
+            'email'    => 'Gerard_Pique@example.com',
+            'role'    => 'medical',
             'password' => bcrypt('password'),
         ]);
     }

@@ -91,4 +91,25 @@ class AdminController extends Controller
           $data = Admin::latest()->paginate(5);
           return view('admin.manageAdmins.adminCrud',compact('data'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
+
+     public function manageAdmins_Create() {
+
+              return view('admin.manageAdmins.adminCrud-Create');
+        }
+
+     public function manageAdmins_save(Request $request)
+         {
+              $request->validate([
+                 'name' => 'required',
+                 'email' => 'required',
+                 'password' => 'required',
+                 'role' => 'required',
+             ]);
+
+             Admin::create($request->all());
+
+             return redirect()->route('admin.manageAdmins.adminCrud')
+                             ->with('success','Post created successfully.');
+         }
+
 }

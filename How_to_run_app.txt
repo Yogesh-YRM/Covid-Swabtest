@@ -12,11 +12,11 @@ Migrate database: - php artisan migrate
 
 Migrate refresh: - php artisan migrate:fresh
 
-Create record in database a specified in code: - php artisan db:seed 
+Create record in database a specified in code: - php artisan db:seed
 
 Run server: - php artisan serve
 
-brows: http://127.0.0.1:8000/admin/login
+brows: http://127.0.0.1:8000/authorize/login
 
 username: admin@localhost.com
 password: password
@@ -24,5 +24,5 @@ password: password
 username: editor@localhost.com
 password: password
 
-username: operator@localhost.com
+username: medical@example.com
 password: password
