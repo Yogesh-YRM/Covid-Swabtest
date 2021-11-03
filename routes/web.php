@@ -14,13 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('registratie.preregister');
 });
+Route::resource('registeren','App\Http\Controllers\RegisterController');
+Route::post('pre_registration','App\Http\Controllers\RegisterController@preregister')->name('preregister');
 
 Route::group([
     'prefix'=>config('admin.prefix'),
     'namespace'=>'App\\Http\\Controllers',
 ],function () {
+
+
+    
 
     Route::get('login','LoginAdminController@formLogin')->name('admin.login');
     Route::post('login','LoginAdminController@login');
@@ -33,5 +38,7 @@ Route::group([
         Route::get('adminCrud', 'adminController@manageAdmins')->name('admin.manageAdmins.adminCrud')->middleware('can:role,"admin","editor"');
         Route::get('adminCrud-Create', 'adminController@manageAdmins_Create')->name('admin.manageAdmins.adminCrud-Create')->middleware('can:role,"admin","editor"');
         Route::post('adminCrud-save', 'adminController@manageAdmins_save')->name('admin.manageAdmins.adminCrud-save')->middleware('can:role,"admin","editor"');
+        Route::resource('adminregistratie','AdminRegisterController');
     });
+   
 });

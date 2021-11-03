@@ -35,6 +35,12 @@
                                 <a href="{{ route('admin') }}" class="nav-link">Data Admin</a>
                             </li>
                         @endcan
+                        <li class="nav-item">
+                                <a href="{{route('adminregistratie.index')}}" class="nav-link">Geregistreerd</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Resultaten</a>
+                            </li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                             <div class="dropdown-menu dropdown-menu-right">
