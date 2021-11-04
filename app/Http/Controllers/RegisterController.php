@@ -89,6 +89,16 @@ class RegisterController extends Controller
 
     public function preregister(Request $request)
     {
+        //DR add validation to pre reg form
+        $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'adress' => 'required',
+            'phonenumber' => 'required',
+            'id_number' => 'required',
+            'email' => 'required',
+            'location' => 'required',
+        ]);
         $input = $request->all();
 
         $pre = DB :: table('registratie')->insertGetid([
