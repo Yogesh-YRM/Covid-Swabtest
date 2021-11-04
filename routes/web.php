@@ -28,7 +28,15 @@ Route::group([
     Route::middleware(['auth:admin'])->group(function () {
         Route::post('logout','LoginAdminController@logout')->name('admin.logout');
         Route::view('/','dashboard')->name('dashboard');
-        Route::view('/post','data-post')->name('post')->middleware('can:role,"admin","editor"');
         Route::view('/admin','data-admin')->name('admin')->middleware('can:role,"admin"');
+
+        Route::get('adminCrud', 'adminController@manageAdmins')->name('admin.manageAdmins.adminCrud')->middleware('can:role,"admin","editor"');
+        Route::get('adminCrud-Create', 'adminController@manageAdmins_Create')->name('admin.manageAdmins.adminCrud-Create')->middleware('can:role,"admin","editor"');
+        Route::post('adminCrud-save', 'adminController@manageAdmins_save')->name('admin.manageAdmins.adminCrud-save')->middleware('can:role,"admin","editor"');
+        Route::get('adminCrud-Show', 'adminController@manageAdmins_show')->name('admin.manageAdmins.adminCrud-Show')->middleware('can:role,"admin","editor"');
+
+       Route::get('authorizeUsers', 'AuthorizeUsersController@create')->name('authorizeUsers.create')->middleware('can:role,"admin","editor"');
+       Route::get('authorizeUsers-index', 'AuthorizeUsersController@index')->name('authorizeUsers.index')->middleware('can:role,"admin","editor"');
+
     });
 });

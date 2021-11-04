@@ -29,7 +29,7 @@ class Admin extends Authenticatable
         $table->id();
         $table->string('name');
         $table->string('email')->unique();
-        $table->enum('role',['admin','editor','operator'])->default('operator');
+        $table->enum('role',['admin','editor','medical'])->default('medical');
         $table->string('password');
         $table->rememberToken();
         $table->timestamps();
