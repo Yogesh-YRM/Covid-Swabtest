@@ -1,17 +1,18 @@
 @extends('template')
 @section('content')
+
 <div class="jumbotron mt-3">
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <div class="pull-left">
-            <h2>Add New User</h2>
+            <h2>Nieuwe gebruiker toevoegen</h2>
         </div>
     </div>
 </div>
 
 @if ($errors->any())
     <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <strong>Whoops!</strong> Er is een probleem met de ingevulde velden.<br><br>
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -20,12 +21,19 @@
     </div>
 @endif
 
-<form action="{{ route('admin.manageAdmins.adminCrud-save') }}" method="POST">
+<form action="{{ route('authorizeUsers.store') }}" method="POST">
     @csrf
     <div class="form-group row">
-       <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+           <label for="inputName" class="col-sm-2 col-form-label">Voornaam</label>
+             <div class="col-sm-10">
+                <input type="text" name="voornaam" class="form-control" id="inputVoornaam" placeholder="Voornaam">
+             </div>
+    </div>
+
+    <div class="form-group row">
+       <label for="inputName" class="col-sm-2 col-form-label">Achternaam</label>
          <div class="col-sm-10">
-            <input type="text" name="name" class="form-control" id="inputName" placeholder="Name">
+            <input type="text" name="achternaam" class="form-control" id="inputAchternaam" placeholder="Achternaam">
          </div>
     </div>
 
@@ -43,10 +51,10 @@
        </div>
        <fieldset class="form-group">
          <div class="row">
-           <legend class="col-form-label col-sm-2 pt-0">Roles</legend>
+           <legend class="col-form-label col-sm-2 pt-0">Rol</legend>
            <div class="col-sm-10">
              <div class="form-check">
-               <input class="form-check-input" type="radio" name="role" id="gridRadios1" value="admin" checked>
+               <input class="form-check-input" type="radio" name="rol" id="gridRadios1" value="admin" checked>
                <label class="form-check-label" for="gridRadios1">
                  admin
                </label>
@@ -75,11 +83,13 @@
 
        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <a class="btn btn-primary" href="{{ route('admin.manageAdmins.adminCrud') }}"> Back</a>
+                <button type="submit" class="btn btn-primary">Opslaan</button>
+                <a class="btn btn-primary" href="{{ route('authorizeUsers.index') }}"> Terug</a>
         </div>
     </div>
 
 </form>
 </div>
 @endsection
+
+
