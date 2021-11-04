@@ -42,7 +42,7 @@ Route::group([
 
         //DR only authorized users can use the scanner 
         Route::get('/qrscanner', function () {
-            return File::get(public_path() . '\custom\qrScanner.html');
+            return File::get(public_path() . '/custom/qrScanner.html');
         })->middleware('can:role,"admin","editor","medical","scanner"');
     });
    
