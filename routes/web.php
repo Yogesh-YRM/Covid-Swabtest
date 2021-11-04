@@ -39,6 +39,11 @@ Route::group([
         Route::get('adminCrud-Create', 'adminController@manageAdmins_Create')->name('admin.manageAdmins.adminCrud-Create')->middleware('can:role,"admin","editor"');
         Route::post('adminCrud-save', 'adminController@manageAdmins_save')->name('admin.manageAdmins.adminCrud-save')->middleware('can:role,"admin","editor"');
         Route::resource('adminregistratie','AdminRegisterController');
+
+        //DR only authorized users can use the scanner 
+        Route::get('/qrscanner', function () {
+            return File::get(public_path() . '\custom\qrScanner.html');
+        })->middleware('can:role,"admin","editor","medical","scanner"');
     });
    
 });

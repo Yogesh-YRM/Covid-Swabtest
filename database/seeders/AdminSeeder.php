@@ -34,5 +34,12 @@ class AdminSeeder extends Seeder
             'role'    => 'medical',
             'password' => bcrypt('password'),
         ]);
+
+        Admin::create([
+            'name'     => 'Gerard Pique',
+            'email'    => 'scanner@example.com',
+            'role'    => 'scanner',
+            'password' => bcrypt('password'),
+        ]);
     }
 }

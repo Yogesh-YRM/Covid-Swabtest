@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -15,10 +16,9 @@ class AdminController extends Controller
     public function index()
     {
 
-      /* $data = Admin::latest()->paginate(5);
+        /* $data = Admin::latest()->paginate(5);
 
       return view('admin.adminCrud',compact('data'))->with('i', (request()->input('page', 1) - 1) * 5); */
-
     }
 
     /**
@@ -28,6 +28,7 @@ class AdminController extends Controller
      */
     public function create()
     {
+
         //
     }
 
@@ -87,29 +88,32 @@ class AdminController extends Controller
         //
     }
 
-    public function manageAdmins() {
-          $data = Admin::latest()->paginate(5);
-          return view('admin.manageAdmins.adminCrud',compact('data'))->with('i', (request()->input('page', 1) - 1) * 5);
+    public function manageAdmins()
+    {
+        $data = Admin::latest()->paginate(5);
+        return view('admin.manageAdmins.adminCrud', compact('data'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-     public function manageAdmins_Create() {
+    public function manageAdmins_Create()
+    {
 
-              return view('admin.manageAdmins.adminCrud-Create');
-        }
+        return view('admin.manageAdmins.adminCrud-Create');
+    }
 
-     public function manageAdmins_save(Request $request)
-         {
-              $request->validate([
-                 'name' => 'required',
-                 'email' => 'required',
-                 'password' => 'required',
-                 'role' => 'required',
-             ]);
+    public function manageAdmins_save(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'role' => 'required',
+        ]);
+        //DR encrypt password
+        $request['password'] = Hash::make($request['password']);
 
-             Admin::create($request->all());
+        Admin::create($request->all());
 
-             return redirect()->route('admin.manageAdmins.adminCrud')
-                             ->with('success','Post created successfully.');
-         }
-
+        return redirect()->route('admin.manageAdmins.adminCrud')
+            ->with('success', 'Post created successfully.');
+    }
 }
