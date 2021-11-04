@@ -11,7 +11,8 @@ class Admin extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name',
+        'voornaam',
+        'achternaam',
         'email',
         'password',
         'role',
@@ -27,7 +28,8 @@ class Admin extends Authenticatable
 {
     Schema::create('admins', function (Blueprint $table) {
         $table->id();
-        $table->string('name');
+        $table->string('voornaam');
+        $table->string('achternaam');
         $table->string('email')->unique();
         $table->enum('role',['admin','editor','medical','scanner'])->default('medical');
         $table->string('password');

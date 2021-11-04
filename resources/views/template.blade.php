@@ -30,7 +30,7 @@
                     @else
                     @can('role',['admin','editor'])
                     <li class="nav-item">
-                        <a href="{{ route('admin.manageAdmins.adminCrud') }}" class="nav-link">Authorized Users</a>
+                        <a href="{{ route('authorizeUsers.index') }}" class="nav-link">Authorized Users</a>
                     </li>
                     @endcan
                     @can('role','admin')
@@ -52,7 +52,7 @@
                         <a href="/authorize/qrscanner" class="nav-link">QR Scanner</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                        <a href="#" class="nav-link" data-toggle="dropdown">{{ Auth::user()->achternaam }}</a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a href="#" class="dropdown-item">My Profile</a>
                             <a href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item">Logout</a>
@@ -77,7 +77,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
-    
+
     function yesnoCheck(that) {
     if (that.value == "wel") {
   alert("check");

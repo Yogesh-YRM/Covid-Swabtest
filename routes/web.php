@@ -25,7 +25,7 @@ Route::group([
 ],function () {
 
 
-    
+
 
     Route::get('login','LoginAdminController@formLogin')->name('admin.login');
     Route::post('login','LoginAdminController@login');
@@ -35,15 +35,13 @@ Route::group([
         Route::view('/','dashboard')->name('dashboard');
         Route::view('/admin','data-admin')->name('admin')->middleware('can:role,"admin"');
 
-        Route::get('adminCrud', 'adminController@manageAdmins')->name('admin.manageAdmins.adminCrud')->middleware('can:role,"admin","editor"');
-        Route::get('adminCrud-Create', 'adminController@manageAdmins_Create')->name('admin.manageAdmins.adminCrud-Create')->middleware('can:role,"admin","editor"');
-        Route::post('adminCrud-save', 'adminController@manageAdmins_save')->name('admin.manageAdmins.adminCrud-save')->middleware('can:role,"admin","editor"');
+        Route::resource('authorizeUsers', 'AuthorizeUsersController');
         Route::resource('adminregistratie','AdminRegisterController');
 
-        //DR only authorized users can use the scanner 
+        //DR only authorized users can use the scanner
         Route::get('/qrscanner', function () {
             return File::get(public_path() . '/custom/qrScanner.html');
         })->middleware('can:role,"admin","editor","medical","scanner"');
     });
-   
+
 });

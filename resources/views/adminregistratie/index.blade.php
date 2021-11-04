@@ -12,7 +12,7 @@
              <!-- <div class="col-sm-10"> -->
              <input type="text" name="searchregistration" class="form-control col-sm-10 pull-left" id="" placeholder="">
 <!-- </div> -->
-               <a class="btn btn-success" href="{{ route('admin.manageAdmins.adminCrud-Create') }}">Search</a>
+               <a class="btn btn-success" href="{{ route('authorizeUsers.create') }}">Search</a>
              </div>
          </div>
      </div>
