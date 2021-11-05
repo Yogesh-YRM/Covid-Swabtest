@@ -27,6 +27,7 @@ class CreateRegistratieTable extends Migration
             $table->string('saturation')->nullable();
             $table->string('vax')->nullable();
             $table->string('bp')->nullable();
+            $table->string('birthdate')->nullable();
             $table->timestamps();
         });
     }
