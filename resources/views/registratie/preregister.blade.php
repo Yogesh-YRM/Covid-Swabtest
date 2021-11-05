@@ -6,7 +6,7 @@
 
 <?php
 use Illuminate\Support\Facades\DB;
-$location = DB:: table('location')->select('*')->get();
+$location = DB:: table('locations')->select('*')->get();
 ?>
     <div class="container">
 <div class="jumbotron mt-3">

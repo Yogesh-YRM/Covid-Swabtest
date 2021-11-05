@@ -47,7 +47,7 @@ class RegisterController extends Controller
     public function show($pre)
     {
         $registratie = DB :: table('registratie as r')->select('r.*','l.name as loc')
-        ->leftjoin('location as l','l.id','r.location')
+        ->leftjoin('locations as l','l.id','r.location')
         ->where('r.id',$pre)
         ->get();
         return view('registratie.registerconfirm')->with('registratie',$registratie[0]);

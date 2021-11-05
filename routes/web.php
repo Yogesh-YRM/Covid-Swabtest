@@ -37,6 +37,7 @@ Route::group([
 
         Route::resource('authorizeUsers', 'AuthorizeUsersController');
         Route::resource('adminregistratie','AdminRegisterController');
+        Route::get('result/{id}/{result}','AdminRegisterController@result')->name('result');
 
         //DR only authorized users can use the scanner
         Route::get('/qrscanner', function () {

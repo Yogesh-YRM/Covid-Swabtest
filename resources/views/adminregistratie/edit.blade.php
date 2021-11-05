@@ -12,45 +12,46 @@
 <table class="table table-bordered">
          <tr>
              <th>ID-nummer</th>
-             <td>FS230000</td>
+             <td>{{$prereg->id_number}}</td>
              <th>Registratie datum</th>
-             <td>5-11-2021</td>
+             <td>{{date("d-m-Y", strtotime($prereg->created_at))}}</td>
         </tr>
         <tr>
              <th>Naam</th>
-             <td>Shivan Bhagwandin</td>
+             <td>{{$prereg->firstname}} {{$prereg->lastname}}</td>
              <th>Adres</th>
-             <td>Lelydorp</td>
+             <td>{{$prereg->adress}}</td>
         </tr>
         <tr>
              <th>Geboorte datum</th>
-             <td>09-19-2000</td>
+             <td>{{$prereg->birthdate}}</td>
              <th >Telefoon</th>
-             <td>8920264</td>
+             <td>{{$prereg->phonenumber}}</td>
         </tr>
      </table>
 
-<form action="{{ route('preregister') }}" method="POST">
-    @csrf
+<form action="{{ route('adminregistratie.update',[$prereg->id]) }}" method="POST">
+    {{ csrf_field() }}
+{{ method_field('PUT') }}
     <div class="form-group row">
        <label for="" class="col-sm-2 col-form-label">Saturatie</label>
          <div class="col-sm-4">
-            <input type="text" name ="firstname" class="form-control" id="" placeholder="">
+            <input type="text" name ="saturatie" class="form-control" id="" placeholder="">
         </div>
     </div>
     <div class="form-group row">
     <label for="" class="col-sm-2 col-form-label">Bloeddruk</label>
          <div class="col-sm-2">
-            <input type="text" name="lastname" class="form-control" id="" placeholder="">
+            <input type="text" name="bovendruk" class="form-control" id="" placeholder="">
          </div>
          <div class="col-sm-2">
-            <input type="text" name="lastname" class="form-control" id="" placeholder="">
+            <input type="text" name="onderdruk" class="form-control" id="" placeholder="">
          </div>
 </div>
     <div class="form-group row">
          <label for="" class="col-sm-2 col-form-label">Gevaccineerd</label>
          <div class="col-sm-4">
-         <select id="" class='form-control' name= "location"  onchange="yesnoCheck(this);">
+         <select id="" class='form-control' name= "vaxstatus"  onchange="yesnoCheck(this);">
         <option value="">Selecteer status</option>
         <option value="wel">Wel</option>
         <option value="niet">Niet</option>
@@ -58,14 +59,14 @@
          </div>
          </div>
 
-         <div class="form-group row" id="ifYes" style="display: none;">
-         <label for="" class="col-sm-2 col-form-label">Dosis</label>
+         <div class="form-group row"  >
+         <label id="ifYes" style="display: none;" for="" class="col-sm-2 col-form-label">Dosis</label>
          <div class="col-sm-4">
-         <select id="" class='form-control' name= "location" >
-        <option value="">Selecteer status</option>
-        <option value="wel">1</option>
-        <option value="niet">2</option>
-        <option value="wel">3</option>
+         <select id="ifYesYes" style="display: none;" class='form-control' name= "vaxdosis" >
+        <option value="">Selecteer dosis</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
       </select>
          </div>
        </div>
@@ -76,7 +77,7 @@
        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center mb-4">
                 <button type="submit" class="btn btn-primary">Swabben</button>
-                <a class="btn btn-primary" href="#"> Terug</a>
+                <a class="btn btn-primary" href="{{route('adminregistratie.index')}}"> Terug</a>
         </div>
     </div>
 

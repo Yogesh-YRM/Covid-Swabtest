@@ -14,7 +14,7 @@ class AdminRegisterController extends Controller
      */
     public function index()
     {
-        $registraties = DB:: table('registratie')->select('*')->get();
+        $registraties = DB:: table('registratie')->select('*')->where('status','!=',"afgehandeld")->get();
         return view ('adminregistratie.index')->with('registraties',$registraties);
     }
 
@@ -59,7 +59,7 @@ class AdminRegisterController extends Controller
     public function edit($id)
     {
         $prereg = DB::table('registratie')->select('*')->where('id',$id)->get();
-        return view('adminregistratie.edit');
+        return view('adminregistratie.edit')->with('prereg',$prereg[0]);
     }
 
     /**
@@ -71,7 +71,22 @@ class AdminRegisterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $bp = array($input['bovendruk'],$input['onderdruk']);
+        $bpjson = json_encode($bp);
+        $vax = array($input['vaxstatus'],$input['vaxdosis']);
+        $vaxjson = json_encode($vax);
+
+        $reg = DB:: table('registratie')->where('id',$id)->update([
+            'saturation'=>$input['saturatie'],
+            'bp'=>$bpjson,
+            'vax'=>$vaxjson,
+            'status'=>"geregistreerd",
+            'updated_at'=>date('Y-m-d H:i:s')
+            
+        
+        ]);
+        return redirect(route('adminregistratie.index'));
     }
 
     /**
@@ -83,5 +98,20 @@ class AdminRegisterController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function result($id,$result)
+    {
+       $result = DB ::table('result')->insertGetid([
+           'registration_id' => $id,
+           'result' => $result,
+           'created_at' => date('Y-m-d H:i:s')
+       ]);
+       $reg = DB:: table('registratie')->where('id',$id)->update([
+
+        'status'=>"afgehandeld"
+
+    ]);
+    return redirect(route('adminregistratie.index'));
     }
 }

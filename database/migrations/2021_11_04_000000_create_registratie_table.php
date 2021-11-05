@@ -15,15 +15,18 @@ class CreateRegistratieTable extends Migration
     {
         Schema::create('registratie', function (Blueprint $table) {
             $table->id();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('phonenumber');
-            $table->string('adress');
-            $table->string('id_number');
-            $table->string('opmerking');
-            $table->integer('location');
-            $table->string('status');
-            $table->string('email');
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('phonenumber')->nullable();
+            $table->string('adress')->nullable();
+            $table->string('id_number')->nullable();
+            $table->string('opmerking')->nullable();
+            $table->integer('location')->nullable();
+            $table->string('status')->nullable();
+            $table->string('email')->nullable();
+            $table->string('saturation')->nullable();
+            $table->string('vax')->nullable();
+            $table->string('bp')->nullable();
             $table->timestamps();
         });
     }
