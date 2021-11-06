@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Twilio\Rest\Client;
+
 
 class AdminRegisterController extends Controller
 {
@@ -137,6 +139,43 @@ class AdminRegisterController extends Controller
         'status'=>"afgehandeld"
 
     ]);
+
+    require_once 'twilio/vendor/autoload.php';
+
+
+
+################################ LIVE KEYS #####################################
+// $account_sid = 'AC46041e1c4e91caee7c9949243e1a1e29';
+// $auth_token = '7c732613583fe910988cc2c8b0ec0240';
+// $twilio_number = '+15703768094';
+// $receiver = 
+################################################################################
+
+################################ TEST KEYS #####################################
+$account_sid = 'AC5a9222e8258ab965b073b8df8a9211c7';
+$auth_token = 'e9c21e06bde59a38d4bbaa3785888c2a';
+$twilio_number = '+18143998410';
+$receiver = '+5978920264';
+################################################################################
+
+
+$client = new Client($account_sid, $auth_token);
+$client->messages->create(
+    // Where to send a text message (your cell phone?)
+    $receiver,
+    array(
+        'from' => $twilio_number,
+        'body' => 'I sent this message in under 10 minutes!'
+    )
+);
     return redirect(route('adminregistratie.index'));
+    }
+
+    public function resultaatoverzicht()
+    {
+        $resultaten = DB::table('registratie as r')->select('r.*','res.*')
+        ->leftjoin('result as res','r.id','res.registration_id')->get();
+        // dd($resultaten);
+return view('adminregistratie.resultaatoverzicht')->with('resultaten',$resultaten);
     }
 }

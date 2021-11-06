@@ -127,6 +127,26 @@ class VaccinationController extends Controller
         $data = DB :: table('vaccinatie as r')->select('r.*')
          ->where('r.id',$id)
          ->get();
+// dd($data);
+   
+// Folder path to be flushed
+$folder_path = "generated_qrcodes";
+   
+// List of name of files inside
+// specified folder
+$files = glob($folder_path.'/'.$data[0]->id_number.'.png'); 
+// dd($files);
+   
+// Deleting all the files in the list
+foreach($files as $file) {
+   
+    if(is_file($file)) 
+    
+        // Delete the given file
+        unlink($file); 
+}
+
+
         return view('vaccinatie.edit')->with('data',$data[0]);
     }
 

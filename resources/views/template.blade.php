@@ -51,7 +51,7 @@
                     @endcan
                     @can('role',['admin','editor'])
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Resultaten</a>
+                        <a href="{{route('resultaatoverzicht')}}" class="nav-link">Resultaten</a>
                     </li>
                     @endcan
                     <li class="nav-item">

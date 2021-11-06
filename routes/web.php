@@ -39,6 +39,7 @@ Route::group([
         Route::resource('vaccinatie', 'VaccinationController');
         Route::resource('adminregistratie','AdminRegisterController');
         Route::get('result/{id}/{result}','AdminRegisterController@result')->name('result');
+        Route::get('resultaten','AdminRegisterController@resultaatoverzicht')->name('resultaatoverzicht');
 
         //DR only authorized users can use the scanner
         Route::get('/qrscanner', function () {
