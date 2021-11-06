@@ -50,6 +50,12 @@ $location = DB:: table('locations')->select('*')->get();
          </div>
        </div>
        <div class="form-group row">
+         <label for="" class="col-sm-2 col-form-label">Geboorte datum<r style="color:red;">*</r></label>
+         <div class="col-sm-10">
+           <input type="date" name="birthdate" class="form-control" id="" placeholder="">
+         </div>
+       </div>
+       <div class="form-group row">
          <label for="" class="col-sm-2 col-form-label">Adres<r style="color:red;">*</r></label>
          <div class="col-sm-10">
            <input type="text" name="adress" class="form-control" id="" placeholder="">

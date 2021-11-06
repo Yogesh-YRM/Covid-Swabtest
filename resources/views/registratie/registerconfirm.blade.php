@@ -40,6 +40,10 @@ $location = DB:: table('locations')->select('*')->get();
     <td>{{$registratie->lastname}}</td>
   </tr>
   <tr>
+    <th>Geboorte datum</th>
+    <td>{{$registratie->birthdate}}</td>
+  </tr>
+  <tr>
     <th>ID-nummer</th>
     <td>{{$registratie->id_number}}</td>
   </tr>

@@ -95,6 +95,7 @@ class RegisterController extends Controller
             'lastname' => 'required',
             'adress' => 'required',
             'phonenumber' => 'required',
+            'birthdate' => 'required',
             'id_number' => 'required',
             'email' => 'required',
             'location' => 'required',
@@ -104,6 +105,7 @@ class RegisterController extends Controller
         $pre = DB :: table('registratie')->insertGetid([
             'firstname' =>$input['firstname'],
             'lastname' =>$input['lastname'],
+            'birthdate' =>$input['birthdate'],
             'adress' =>$input['adress'],
             'phonenumber' =>$input['phonenumber'],
             'id_number' =>$input['id_number'],

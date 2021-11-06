@@ -86,7 +86,17 @@
         document.getElementById("ifYes").style.display = "none";
         document.getElementById("ifYesYes").style.display = "none";
     }
-}</script>
+}
+function yesnoCheckcreate(that) {
+    if (that.value == "wel") {
+        document.getElementById("ifYesYescreate").style.display = "inherit";
+        document.getElementById("ifYescreate").style.display = "inherit";
+    } else {
+        document.getElementById("ifYescreate").style.display = "none";
+        document.getElementById("ifYesYescreate").style.display = "none";
+    }
+}
+</script>
 </body>
 
 </html>

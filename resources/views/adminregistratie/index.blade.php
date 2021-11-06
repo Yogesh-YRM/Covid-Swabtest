@@ -4,13 +4,14 @@
 
 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
 
-         <div class="col-lg-12 margin-tb">
-             <div class="pull-left">
+         <div class="col-lg-12 margin-tb pull-right">
+             <div class="">
                  <h2>Registraties overzicht</h2>
              </div>
-             <div class="row">
-             <input type="text" name="searchregistration" class="form-control col-sm-9 mr-3" id="" placeholder="">
-             <a class="btn btn-success col-sm-2 pull-right" style="" href="">Search</a>
+             <div class="row col-sm-12">
+
+             <input type="text" name="searchregistration" class="form-control col-sm-3 mr-3 " id= "myInput" placeholder="Zoek naam..." onkeyup="searchName();"> 
+             <a class="btn btn-success" href= "{{route('adminregistratie.create')}}"  style="float: right;">Nieuwe registratie</a>
              </div>
          </div>
      </div>
@@ -18,7 +19,7 @@
 
 
 
-     <table class="table table-bordered">
+     <table class="table table-bordered" id = "myTable">
          <tr>
              <th>Registratie datum</th>
              <th>ID-nummer</th>
@@ -38,16 +39,16 @@
                  @if($reg->status == "preregistratie")
                         <a class="btn btn-primary" href= "{{route('adminregistratie.edit',[$reg->id])}}">Registreer</a>
                         @elseif($reg->status == "geregistreerd")
-                        <a class="btn btn-primary" href= "{{route('adminregistratie.edit',[$reg->id])}}">Bezichtigen</a>
+                        <a class="btn btn-success" href= "{{route('adminregistratie.show',[$reg->id])}}">Bezichtigen</a>
                         @endif
              </td>
              <td>
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Resultaat
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{route('result',[$reg->id,'negatief'])}}">Negatief</a>
-                                <a class="dropdown-item" href="{{route('result',[$reg->id,'positief'])}}">Positief</a>
+                                <a class="dropdown-item" href="{{route('result',[$reg->id,'negatief'])}}" onclick="return confirm('Resultaat negatief boeken');">Negatief</a>
+                                <a class="dropdown-item" href="{{route('result',[$reg->id,'positief'])}}" onclick="return confirm('Resultaat negatief boeken');">Positief</a>
                             </div>
              </td>
 
@@ -58,5 +59,28 @@
 </div>
 
 
+<script>
+    function searchName() {
+        // Declare variables 
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+    
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                } else {
+                tr[i].style.display = "none";
+                }
+            } 
+        }
+    }
+    
 
+</script>
 @endsection
