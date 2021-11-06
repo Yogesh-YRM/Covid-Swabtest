@@ -1,0 +1,33 @@
+<?php return array (
+  'root' => 
+  array (
+    'pretty_version' => '1.0.0+no-version-set',
+    'version' => '1.0.0.0',
+    'aliases' => 
+    array (
+    ),
+    'reference' => NULL,
+    'name' => '__root__',
+  ),
+  'versions' => 
+  array (
+    '__root__' => 
+    array (
+      'pretty_version' => '1.0.0+no-version-set',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'twilio/sdk' => 
+    array (
+      'pretty_version' => '6.31.0',
+      'version' => '6.31.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9a866ad7e6b4681c7d9564ee7b9d97cb67deb6a0',
+    ),
+  ),
+);
