@@ -54,7 +54,7 @@
            <legend class="col-form-label col-sm-2 pt-0">Rol</legend>
            <div class="col-sm-10">
              <div class="form-check">
-               <input class="form-check-input" type="radio" name="rol" id="gridRadios1" value="admin" checked>
+               <input class="form-check-input" type="radio" name="role" id="gridRadios1" value="admin" checked>
                <label class="form-check-label" for="gridRadios1">
                  admin
                </label>

@@ -17,7 +17,6 @@ class AuthorizeUsersController extends Controller
     {
         $data = Admin::latest()->paginate(5);
         return view('authorizeUsers.index', compact('data'))->with('i', (request()->input('page', 1) - 1) * 5);
-
     }
 
     /**
@@ -39,10 +38,11 @@ class AuthorizeUsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-           'name' => 'required',
-           'email' => 'required',
-           'password' => 'required',
-           'role' => 'required',
+            'voornaam' => 'required',
+            'achternaam' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'role' => 'required',
         ]);
 
         //DR encrypt password
@@ -51,7 +51,7 @@ class AuthorizeUsersController extends Controller
         Admin::create($request->all());
 
         return redirect()->route('authorizeUsers.index')
-        ->with('success', 'Gebruiker succesvol aangemaakt.');
+            ->with('success', 'Gebruiker succesvol aangemaakt.');
     }
 
     /**
@@ -74,7 +74,7 @@ class AuthorizeUsersController extends Controller
     public function edit($id)
     {
         $data = Admin::findOrFail($id);
-        return view('authorizeUsers.edit',compact('data'));
+        return view('authorizeUsers.edit', compact('data'));
     }
 
     /**
@@ -86,11 +86,11 @@ class AuthorizeUsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData =$request->validate([
-          'name' => 'required',
-          'email' => 'required',
-          'password' => 'required',
-          'role' => 'required',
+        $validatedData = $request->validate([
+            'voornaam' => 'required',
+            'achternaam' => 'required',
+            'password' => 'required',
+            'role' => 'required',
         ]);
 
         //DR encrypt password
@@ -100,7 +100,7 @@ class AuthorizeUsersController extends Controller
         Admin::whereId($id)->update($validatedData);
 
         return redirect()->route('authorizeUsers.index')
-        ->with('success','Gebruiker gegevens zijn succesvol gewijzigd.');
+            ->with('success', 'Gebruiker gegevens zijn succesvol gewijzigd.');
     }
 
     /**
@@ -111,10 +111,10 @@ class AuthorizeUsersController extends Controller
      */
     public function destroy($id)
     {
-         $data = Admin::findOrFail($id);
-         $data->delete();
+        $data = Admin::findOrFail($id);
+        $data->delete();
 
-         return redirect()->route('authorizeUsers.index')
-         ->with('success','Gebruiker succesvol verwijderd.');
+        return redirect()->route('authorizeUsers.index')
+            ->with('success', 'Gebruiker succesvol verwijderd.');
     }
 }
