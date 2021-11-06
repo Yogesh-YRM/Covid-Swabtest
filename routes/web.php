@@ -36,6 +36,7 @@ Route::group([
         Route::view('/admin','data-admin')->name('admin')->middleware('can:role,"admin"');
 
         Route::resource('authorizeUsers', 'AuthorizeUsersController');
+        Route::resource('vaccinatie', 'VaccinationController');
         Route::resource('adminregistratie','AdminRegisterController');
         Route::get('result/{id}/{result}','AdminRegisterController@result')->name('result');
 
