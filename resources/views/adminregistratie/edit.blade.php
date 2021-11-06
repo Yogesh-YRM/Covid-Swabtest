@@ -71,14 +71,14 @@
          </div>
        </div>
        
-       
-      
-
-       </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center mb-4">
+       <div class="col-xs-12 col-sm-12 col-md-12 text-center ">
                 <button type="submit" class="btn btn-primary">Swabben</button>
                 <a class="btn btn-primary" href="{{route('adminregistratie.index')}}"> Terug</a>
         </div>
+      
+
+       </div>
+       
     </div>
 
 </form>
