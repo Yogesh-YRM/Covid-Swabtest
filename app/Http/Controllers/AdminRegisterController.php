@@ -171,11 +171,52 @@ $client->messages->create(
     return redirect(route('adminregistratie.index'));
     }
 
-    public function resultaatoverzicht()
+    public function resultaatoverzicht(Request $request)
     {
-        $resultaten = DB::table('registratie as r')->select('r.*','res.*')
-        ->leftjoin('result as res','r.id','res.registration_id')->get();
+        $input = $request->all();
+        // dd($input);
+        $resultaten = DB::table('registratie as r')->select('r.*','res.*','res.created_at as today')
+        ->leftjoin('result as res','r.id','res.registration_id');
         // dd($resultaten);
-return view('adminregistratie.resultaatoverzicht')->with('resultaten',$resultaten);
+
+
+        if (isset($input['resultfilter'])) {
+
+
+
+               echo '<pre>';
+                var_dump($input);
+               echo '</pre>';
+               exit();
+    
+                // Filter on resultaat
+         
+                
+                if (isset($input['resultaatfilter']) && $input['resultaatfilter'] != '') {
+                    $resultaten = $resultaten->where('res.result', $input['resultaatfilter']);
+                }
+    
+                //Filter on vaccinatie
+                if (isset($input['vaxfilter']) && $input['vaxfilter'] != '') {
+                    $resultaten = $resultaten->where('r.vax','like','%'. $input['vaxfilter'].'%');
+                }
+
+    
+                //Filter on resultaatdate range
+    
+                $resultdatumRange = explode(" - ", $input['resultdatefilter']);
+                $resultdatumStart = implode("-", array_reverse(explode("-", $resultdatumRange[0])));
+                $resultdatumEnd = implode("-", array_reverse(explode("-", $resultdatumRange[1])));
+                if (isset($resultdatumStart) && isset($resultdatumEnd)) {
+                    $resultaten =  $resultaten->whereBetween('res.created_at', [$resultdatumStart, $resultdatumEnd]);
+                }
+    
+                $resultaten =  $resultaten->get();
+
+                return view('adminregistratie.resultaatoverzicht')->with('resultaten',$resultaten);
+                   
+            }
+            $resultaten =  $resultaten->get();
+            return view('adminregistratie.resultaatoverzicht')->with('resultaten',$resultaten);
     }
 }

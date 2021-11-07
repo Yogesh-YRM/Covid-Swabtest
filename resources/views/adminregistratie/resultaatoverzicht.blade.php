@@ -4,17 +4,44 @@
 
 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
 
-         <div class="col-lg-12 margin-tb pull-right">
+    <div class="col-lg-12 margin-tb ">
              <div class="">
                  <h2>Resultaten rapportage</h2>
              </div>
-             <div class="row col-sm-12">
-
-             <input type="text" name="searchregistration" class="form-control col-sm-3 mr-3 " id= "myInput" placeholder="Zoek naam..." onkeyup="searchName();"> 
-             <a class="btn btn-success" href= "{{route('adminregistratie.create')}}"  style="float: right;">Nieuwe registratie</a>
+             <form method="GET" action="">
+        <div class="row col-sm-12">
+             <div class="col-sm-3">
+                <select id="" class='form-control' name= "resultaatfilter" >
+                <option value="">Selecteer resultaat</option>
+                <option value="positief">Positief</option>
+                <option value="negatief">Negatief</option>
+                </select>
+            </div>
+         <div class="col-sm-3 ">
+                <select id="" class='form-control' name= "vaxfilter"  >
+                <option value="">Selecteer gevaccineerd</option>
+                <option value="wel">Wel</option>
+                <option value="niet">Niet</option>
+                </select>
+            </div>
+         <div class="col-sm-3 ">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                    <input type="text" class="form-control pull-right" id="report_result" value="" name="resultdatefilter">
+            </div>
+         </div>
+         
+         <div class="form-group col-sm-1">
+            <input type="submit" value="Filter" class="btn btn-success " name="resultfilter" />
+         </div>
+         <div class="form-group col-sm-1">
+            <a href="{!! route('resultaatoverzicht') !!}" class="btn btn-success">Clear </a>
+        </div>
              </div>
          </div>
-     </div>
+</form>
      <br>
 
 
@@ -30,7 +57,7 @@
          </tr>
       @foreach($resultaten as $res)
          <tr>
-             <td>{{date("d-m-Y", strtotime($res->created_at))}}</td>
+             <td>{{date("d-m-Y", strtotime($res->today))}}</td>
              <td>{{$res->id_number}}</td>
              <td>{{$res->firstname}} {{$res->lastname}}</td>
              <td>{{$res->phonenumber}}</td>
