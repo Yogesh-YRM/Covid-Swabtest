@@ -42,8 +42,11 @@ Route::group([
         Route::get('resultaten','AdminRegisterController@resultaatoverzicht')->name('resultaatoverzicht');
 
         //DR only authorized users can use the scanner
-        Route::get('/qrscanner', function () {
-            return File::get(public_path() . '/custom/qrScanner.html');
+        Route::get('/vaccinatie-eqrscanner', function () {
+            return File::get(public_path() . '/custom/vaccinatie-eqrscanner.html');
+        })->middleware('can:role,"admin","editor","medical","scanner"');
+        Route::get('/pcr-qrscanner', function () {
+            return File::get(public_path() . '/custom/pcr_qrScanner.html');
         })->middleware('can:role,"admin","editor","medical","scanner"');
     });
 
