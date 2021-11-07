@@ -179,10 +179,11 @@ $smsresult = DB::table('registratie as r')->select('r.*','res.*','res.created_at
     {
         $input = $request->all();
         // dd($input);
-        $resultaten = DB::table('registratie as r')->select('r.*','res.*','res.created_at as today')
-        ->leftjoin('result as res','r.id','res.registration_id');
+        // $resultaten = DB::table('registratie as r')->select('r.*','res.*','res.created_at as today')
+        // ->leftjoin('result as res','r.id','res.registration_id');
         // dd($resultaten);
-
+        $resultaten = DB::table('result as res')->select('r.*','res.*','res.created_at as today')
+        ->leftjoin('registratie as r','r.id','res.registration_id');
 
         if (isset($input['resultfilter'])) {
 
