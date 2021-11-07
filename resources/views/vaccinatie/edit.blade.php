@@ -47,14 +47,16 @@
                </div>
 
                <div class="form-group row">
-                     <label for="inputManufracturer" class="col-sm-2 col-form-label">Fabrikant</label>
-                          <div class="col-sm-4">
-                             <input type="text" name="Manufracturer" class="form-control" value="{{ $data->manufracturer }}">
-                          </div>
-                      <label for="inputStatus" class="col-sm-2 col-form-label">Status</label>
-                           <div class="col-sm-4">
-                              <input type="text" name="id_number" class="form-control" value="{{ $data->status }}">
-                           </div>
+                    <label for="inputManufracture" class="col-sm-2 col-form-label">Manufracture</label>
+                        <div class="col-sm-10">
+                            <select class="custom-select mr-sm-2" name="manufracturer" id="inlineFormCustomSelect" >
+                                <option selected>Choose...</option>
+                                <option value="AstraZeneca">AstraZeneca</option>
+                                <option value="Moderna">Moderna</option>
+                                <option value="Pfizer">Pfizer</option>
+                                <option value="Sinopharm">Sinopharm</option>
+                            </select>
+                        </div>
                </div>
 
                   <div class="form-row mt-4">
@@ -102,6 +104,20 @@
                               <label for="inputVaccinator3">Naam Vaccinator booster</label>
                               <input type="text" name="vaccinator3" class="form-control" value="{{ $data->vaccinator3 }}">
                          </div>
+                     </div>
+
+                     <div class="form-group row mt-3">
+                          <label for="inputStatus" class="col-sm-2 col-form-label">Status</label>
+
+                          <div class="col-sm-10">
+                              <select class="custom-select mr-sm-2" name="status" id="inlineFormCustomSelect" >
+                                 <option selected>Choose...</option>
+                                 <option value="1e Dose">1e Dose</option>
+                                 <option value="Vaccinated">2e Dose</option>
+                                 <option value="Vaccinated + Booster">Booster</option>
+                              </select>
+                          </div>
+
                      </div>
 
                      <div class="col-xs-12 col-sm-12 col-md-12 text-center">

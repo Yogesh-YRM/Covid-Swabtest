@@ -127,26 +127,23 @@ class VaccinationController extends Controller
         $data = DB :: table('vaccinatie as r')->select('r.*')
          ->where('r.id',$id)
          ->get();
-// dd($data);
-   
-// Folder path to be flushed
-$folder_path = "generated_qrcodes";
-   
-// List of name of files inside
-// specified folder
-$files = glob($folder_path.'/'.$data[0]->id_number.'.png'); 
-// dd($files);
-   
-// Deleting all the files in the list
-foreach($files as $file) {
-   
-    if(is_file($file)) 
-    
+
+
+        // Folder path to be flushed
+        $folder_path = "generated_qrcodes";
+
+        // List of name of files inside
+        // specified folder
+        $files = glob($folder_path.'/'.$data[0]->id_number.'.png');
+
+        // Deleting all the files in the list
+        foreach($files as $file) {
+
+        if(is_file($file))
+
         // Delete the given file
-        unlink($file); 
-}
-
-
+        unlink($file);
+        }
         return view('vaccinatie.edit')->with('data',$data[0]);
     }
 
@@ -160,44 +157,39 @@ foreach($files as $file) {
     public function update(Request $request, $id)
     {
 
-           $directory='storage/FR2.png';
-  File::delete('public/generated_qrcodes/Serginio.png');
+           $file = 'generated_qrcodes/'.$request['id_number'].'.png';
+           $message= 'hello123';
 
-Storage::disk('public')->delete($directory);
-//            $file = 'generated_qrcodes/'.$request['first_name'].'.png';
-//            $message= 'hello123';
-//
-//
-//                   $newQrcode = QRCode::text($message)
-//                    ->setSize(8)
-//                    ->setMargin(2)
-//                    ->setOutfile($file)
-//                    ->png();
+          $newQrcode = QRCode::text($message)
+            ->setSize(8)
+            ->setMargin(2)
+            ->setOutfile($file)
+            ->png();
 
-//          $pre = DB :: table('vaccinatie')->insertGetid([
-//              'first_name' =>$input['first_name'],
-//              'last_name' =>$input['last_name'],
-//              'birth_date' =>$input['birth_date'],
-//              'id_number' =>$input['id_number'],
-//              'manufracturer' =>$input['manufracturer'],
-//              'lot_number1' =>$input['lot_number1'],
-//              'date1' =>$input['date1'],
-//              'vaccinator1'=>$input['vaccinator1'],
-//
-//               'lot_number2' =>$input['lot_number2'],
-//               'date2' =>$input['date2'],
-//               'vaccinator2'=>$input['vaccinator2'],
-//
-//               'lot_number3' =>$input['lot_number3'],
-//               'date3' =>$input['date3'],
-//               'vaccinator3'=>$input['vaccinator3'],
-//
-//              'status'=>$input['status'],
-//              'qr_code'=>$file,
-//              'created_at' =>date('Y-m-d H:i:s')
-//          ]);
-//                 return redirect()->route('authorizeUsers.index')
-//                 ->with('success','Gebruiker gegevens zijn succesvol gewijzigd.');
+         $data = DB :: table('vaccinatie')->update([
+             'first_name' =>$request['first_name'],
+             'last_name' =>$request['last_name'],
+             'birth_date' =>$request['birth_date'],
+             'id_number' =>$request['id_number'],
+             'manufracturer' =>$request['manufracturer'],
+             'lot_number1' =>$request['lot_number1'],
+             'date1' =>$request['date1'],
+             'vaccinator1'=>$request['vaccinator1'],
+
+              'lot_number2' =>$request['lot_number2'],
+              'date2' =>$request['date2'],
+              'vaccinator2'=>$request['vaccinator2'],
+
+              'lot_number3' =>$request['lot_number3'],
+              'date3' =>$request['date3'],
+              'vaccinator3'=>$request['vaccinator3'],
+
+             'status'=>$request['status'],
+             'qr_code'=>$file,
+             'created_at' =>date('Y-m-d H:i:s')
+         ]);
+         return redirect()->route('vaccinatie.index')
+            ->with('success','Gebruiker gegevens zijn succesvol gewijzigd.');
     }
 
     /**

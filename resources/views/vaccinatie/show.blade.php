@@ -5,7 +5,7 @@
    <div class="row">
        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
            <div class="pull-left">
-               <h2>Nieuwe gebruiker toevoegen</h2>
+               <h2>Digitale vaccinatie kaart</h2>
            </div>
        </div>
    </div>
@@ -22,38 +22,58 @@
    @endif
       <form>
           @csrf
-             <div class="form-group row">
-                <label for="inputName" class="col-sm-2 col-form-label">Voornaam</label>
-                  <div class="col-sm-4">
-                     <input type="text" name="first_name" class="form-control" disabled value="{{ $data->first_name }}"/>
-                  </div>
-                 <label for="inputName" class="col-sm-2 col-form-label">Achternaam</label>
-                  <div class="col-sm-4">
-                     <input type="text" name="last_name" class="form-control" disabled value="{{ $data->last_name }}">
-                  </div>
-             </div>
 
-               <div class="form-group row">
-                   <label for="inputBirthDate" class="col-sm-2 col-form-label">Geboorte datum</label>
-                   <div class="col-sm-4">
-                     <input type="date" name="birth_date" class="form-control" disabled value="{{ $data->birth_date }}">
-                   </div>
-                   <label for="inputId_nummer" class="col-sm-2 col-form-label">ID-Nummer</label>
-                   <div class="col-sm-4">
-                      <input type="text" name="id_number" class="form-control" disabled value="{{ $data->id_number }}">
-                   </div>
-               </div>
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="card">
+                <div class="card-body">
+                    <label for="inputName" class="">Voornaam</label>
+                    <input type="text" name="first_name" class="form-control" disabled value="{{ $data->first_name }}"/>
 
-               <div class="form-group row">
-                     <label for="inputManufracturer" class="col-sm-2 col-form-label">Fabrikant</label>
-                          <div class="col-sm-4">
-                             <input type="text" name="Manufracturer" class="form-control" disabled value="{{ $data->manufracturer }}">
-                          </div>
-                      <label for="inputStatus" class="col-sm-2 col-form-label">Status</label>
-                           <div class="col-sm-4">
-                              <input type="text" name="id_number" class="form-control" disabled value="{{ $data->status }}">
-                           </div>
-               </div>
+                    <label for="inputName" >Achternaam</label>
+                    <input type="text" name="last_name" class="form-control" disabled value="{{ $data->last_name }}">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="inputBirthDate">Geboorte datum</label>
+                          <input type="date" class="form-control" id="inputBirthDate" disabled value="{{ $data->birth_date }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="inputId_nummer">ID-Nummer</label>
+                          <input type="text" class="form-control" id="inputId_nummer" disabled value="{{ $data->id_number }}">
+                        </div>
+                      </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="card">
+                <div class="card-body">
+                    <div class=" text-center">
+                      <img src="{{ asset($data->qr_code) }}"  class="rounded float-center" alt="...">
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-body">
+
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="inputManufracturer">Fabrikant</label>
+                          <input type="text" class="form-control" id="inputManufracturer" disabled value="{{ $data->manufracturer }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label for="inputStatus">Status</label>
+                          <input type="text" class="form-control" id="inputStatus" disabled value="{{ $data->status }}">
+                        </div>
+                      </div>
 
                   <div class="form-row mt-4">
                       <div class="form-group col-md-4">
@@ -101,13 +121,10 @@
                               <input type="text" name="vaccinator3" class="form-control" disabled value="{{ $data->vaccinator3 }}">
                          </div>
                      </div>
-
-
-                   <div class="row ">
-                   <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                      <img src="{{ asset($data->qr_code) }}"  class="rounded float-center" alt="...">
-                   </div>
-                   </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
       </form>
