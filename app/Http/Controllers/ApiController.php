@@ -23,12 +23,12 @@ class ApiController extends Controller
     public function PCR_QRvalidation(Request $request)
     {
        $id_number = Crypt::decryptString($request->id);
-       $user = DB::table('result')->where('registration_id', $id_number)->get();
+    //    $user = DB::table('result')->where('registration_id', $id_number)->get();
 
-       $smsresult = DB::table('registratie as r')->select('r.*', 'res.*', 'res.created_at as today')
+       $user = DB::table('registratie as r')->select('r.*', 'res.*', 'res.created_at as today')
             ->leftjoin('result as res', 'r.id', 'res.registration_id')
             ->where('res.id', $id_number)->get();
     // var_dump($user);
-    return response()->json($smsresult);
+    return response()->json($user);
     }
 }
