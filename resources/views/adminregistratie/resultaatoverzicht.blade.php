@@ -57,7 +57,7 @@
          </tr>
       @foreach($resultaten as $res)
          <tr>
-             <td>{{date("d-m-Y", strtotime($res->today))}}</td>
+             <td>{{date("d-m-Y", strtotime($res->created_at))}}</td>
              <td>{{$res->id_number}}</td>
              <td>{{$res->firstname}} {{$res->lastname}}</td>
              <td>{{$res->phonenumber}}</td>

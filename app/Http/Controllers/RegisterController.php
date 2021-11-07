@@ -117,4 +117,9 @@ class RegisterController extends Controller
         ]);
     return redirect (route('registeren.show',[$pre]));
     }
+
+    public function result_pdf()
+    {
+        return view('registratie.resultpdf');
+    }
 }
