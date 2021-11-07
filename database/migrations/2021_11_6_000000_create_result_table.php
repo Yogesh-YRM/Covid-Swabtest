@@ -17,6 +17,7 @@ class CreateResultTable extends Migration
             $table->id();
             $table->integer('registration_id')->nullable();
             $table->string('result')->nullable();
+            $table->string('qr_code')->nullable();
             $table->timestamps();
         });
     }

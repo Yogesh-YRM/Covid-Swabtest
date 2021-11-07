@@ -91,7 +91,7 @@
 </head>
 
 <body>
-    <h2 class="header">PCR QR Scanner</h2>
+    <h2 class="header">QRcode Scanner</h2>
     <div id="reader" width="300px"></div>
     <div id='add_to_me'></div>
 
@@ -132,28 +132,24 @@
                 redirect: 'follow'
             };
 
-            fetch("http://127.0.0.1:8000/api/PCRQR", requestOptions)
+            fetch("http://127.0.0.1:8000/api/QR", requestOptions)
                 .then(response => response.text())
                 .then(result => {
-                    // console.log(result)
+                    console.log(result)
                     console.log(JSON.parse(result))
                     var res = JSON.parse(result);
                     modal.style.display = "block";
-                    if(res[0].result =="negatief"){
-                        document.getElementById('myModalcont').innerHTML ='<table ><tr><td><b>Voornaam:</b></td><td>'+res[0].firstname+'</td></tr><tr><td><b>Achternaam:</b></td><td>'+res[0].lastname+'</td></tr><tr><td><b>ID-nummer:</b></td><td>'+res[0].id_number+'</td></tr><tr><td><b>Datum Resultaat:</b></td><td>'+res[0].today+'</td></tr><tr><td><b>Resultaat:</b></td><td style="color:green;">'+res[0].result+'</td></tr></table><button class="closeModal">Terug</button>'
-                    } else if (res[0].result =="positief"){
-                        document.getElementById('myModalcont').innerHTML ='<table ><tr><td><b>Voornaam:</b></td><td>'+res[0].firstname+'</td></tr><tr><td><b>Achternaam:</b></td><td>'+res[0].lastname+'</td></tr><tr><td><b>ID-nummer:</b></td><td>'+res[0].id_number+'</td></tr><tr><td><b>Datum Resultaat:</b></td><td>'+res[0].today+'</td></tr><tr><td><b>Resultaat:</b></td><td style="color:red;">'+res[0].result+'</td></tr></table><button class="closeModal">Terug</button>'
-                    } 
-                    // if (res[0].status == '1e Dose') {
-                    //     vacStatus = "Eerste prik gevaccineerd"
-                    //     document.getElementById('myModalcont').innerHTML = '<table><tr><td><b>Voornaam:</b></td><td> ' + res[0].first_name + '</td></tr><tr><td><b>Achternaam:</b></td><td> ' + res[0].last_name + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_number + '</td></tr></table><p><b>Vaccinatie status:</b><br>' + vacStatus + '</p><button class="closeModal">Terug</button>'
-                    // } else if (res[0].status == 'Vaccinated') {
-                    //     vacStatus = "Volledig gevaccineerd"
-                    //     document.getElementById('myModalcont').innerHTML = '<table><tr><td><b>Voornaam:</b></td><td> ' + res[0].first_name + '</td></tr><tr><td><b>Achternaam:</b></td><td> ' + res[0].last_name + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_number + '</td></tr></table><p><b>Vaccinatie status:</b><br>' + vacStatus + '</p><button class="closeModal">Terug</button>'
-                    // } else if (res[0].status == 'Vaccinated + Booster') {
-                    //     vacStatus = "volledig gevaccineerd en heeft de " + res[0].manufracturer + " Booster ook genomen"
-                    //     document.getElementById('myModalcont').innerHTML = '<table><tr><td><b>Voornaam:</b></td><td> ' + res[0].first_name + '</td></tr><tr><td><b>Achternaam:</b></td><td> ' + res[0].last_name + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_number + '</td></tr></table><p><b>Vaccinatie status:</b><br>' + vacStatus + '</p><button class="closeModal">Terug</button>'
-                    // }
+
+                    if (res[0].status == '1e Dose') {
+                        vacStatus = "Eerste prik gevaccineerd"
+                        document.getElementById('myModalcont').innerHTML = '<table><tr><td><b>Voornaam:</b></td><td> ' + res[0].first_name + '</td></tr><tr><td><b>Achternaam:</b></td><td> ' + res[0].last_name + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_number + '</td></tr></table><p><b>Vacinatie status:</b><br>' + vacStatus + '</p><button class="closeModal">Terug</button>'
+                    } else if (res[0].status == '2e Dose') {
+                        vacStatus = "Volledig gevaccineerd"
+                        document.getElementById('myModalcont').innerHTML = '<table><tr><td><b>Voornaam:</b></td><td> ' + res[0].first_name + '</td></tr><tr><td><b>Achternaam:</b></td><td> ' + res[0].last_name + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_number + '</td></tr></table><p><b>Vacinatie status:</b><br>' + vacStatus + '</p><button class="closeModal">Terug</button>'
+                    } else if (res[0].status == 'Booster') {
+                        vacStatus = "volledig gevaccineerd en heeft de" + res[0].manufracturer + " Booster ook genomen"
+                        document.getElementById('myModalcont').innerHTML = '<table><tr><td><b>Voornaam:</b></td><td> ' + res[0].first_name + '</td></tr><tr><td><b>Achternaam:</b></td><td> ' + res[0].last_name + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_number + '</td></tr></table><p><b>Vacinatie status:</b><br>' + vacStatus + '</p><button class="closeModal">Terug</button>'
+                    }
                     var button = document.getElementsByClassName("closeModal")[0];
                     button.onclick = function () {
                         modal.style.display = "none";
