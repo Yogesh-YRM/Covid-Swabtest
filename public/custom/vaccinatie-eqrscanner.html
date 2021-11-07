@@ -143,11 +143,11 @@
                     if (res[0].status == '1e Dose') {
                         vacStatus = "Eerste prik gevaccineerd"
                         document.getElementById('myModalcont').innerHTML = '<table><tr><td><b>Voornaam:</b></td><td> ' + res[0].first_name + '</td></tr><tr><td><b>Achternaam:</b></td><td> ' + res[0].last_name + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_number + '</td></tr></table><p><b>Vaccinatie status:</b><br>' + vacStatus + '</p><button class="closeModal">Terug</button>'
-                    } else if (res[0].status == '2e Dose') {
+                    } else if (res[0].status == 'Vaccinated') {
                         vacStatus = "Volledig gevaccineerd"
                         document.getElementById('myModalcont').innerHTML = '<table><tr><td><b>Voornaam:</b></td><td> ' + res[0].first_name + '</td></tr><tr><td><b>Achternaam:</b></td><td> ' + res[0].last_name + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_number + '</td></tr></table><p><b>Vaccinatie status:</b><br>' + vacStatus + '</p><button class="closeModal">Terug</button>'
-                    } else if (res[0].status == 'Booster') {
-                        vacStatus = "volledig gevaccineerd en heeft de" + res[0].manufracturer + " Booster ook genomen"
+                    } else if (res[0].status == 'Vaccinated + Booster') {
+                        vacStatus = "volledig gevaccineerd en heeft de " + res[0].manufracturer + " Booster ook genomen"
                         document.getElementById('myModalcont').innerHTML = '<table><tr><td><b>Voornaam:</b></td><td> ' + res[0].first_name + '</td></tr><tr><td><b>Achternaam:</b></td><td> ' + res[0].last_name + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_number + '</td></tr></table><p><b>Vaccinatie status:</b><br>' + vacStatus + '</p><button class="closeModal">Terug</button>'
                     }
                     var button = document.getElementsByClassName("closeModal")[0];

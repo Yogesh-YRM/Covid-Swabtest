@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Vaccinatie;
 use Flash;
 use QRCode;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
 
 class VaccinationController extends Controller
@@ -20,8 +21,8 @@ class VaccinationController extends Controller
      */
     public function index()
     {
-       $data = DB:: table('vaccinatie')->select('*')->get();
-               return view ('vaccinatie.index')->with('data',$data);
+        $data = DB::table('vaccinatie')->select('*')->get();
+        return view('vaccinatie.index')->with('data', $data);
     }
 
     /**
@@ -42,59 +43,59 @@ class VaccinationController extends Controller
      */
     public function store(Request $request)
     {
-          $request->validate([
-               'first_name' => 'required',
-               'last_name' => 'required',
-               'birth_date' => 'required',
-               'id_number' => 'required',
-               'status' => 'required',
-            ]);
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'birth_date' => 'required',
+            'id_number' => 'required',
+            'status' => 'required',
+        ]);
 
-         $input = $request->all();
+        $input = $request->all();
 
-         $file = 'generated_qrcodes/'.$input['id_number'].'.png';
-         $message= $input['first_name'].' '.$input['last_name'].' '.$input['id_number'].' is volledig gevaccineerd en heeft de '.$input['manufracturer'].' Booster ook genomen';
+        $file = 'generated_qrcodes/' . $input['id_number'] . '.png';
+        $message = $input['first_name'] . ' ' . $input['last_name'] . ' ' . $input['id_number'] . ' is volledig gevaccineerd en heeft de ' . $input['manufracturer'] . ' Booster ook genomen';
 
-         if($input['status']=='1e Dose'){
-            $message= $input['first_name'].' '.$input['last_name'].' '.$input['id_number'].' is met de eerste prik gevaccineerd';
+        if ($input['status'] == '1e Dose') {
+            $message = $input['first_name'] . ' ' . $input['last_name'] . ' ' . $input['id_number'] . ' is met de eerste prik gevaccineerd';
+        } elseif ($input['status'] == '2e Dose') {
+            $message = $input['first_name'] . ' ' . $input['last_name'] . ' ' . $input['id_number'] . ' is volledig gevaccineerd';
+        } elseif ($input['status'] == 'Booster') {
+            $message = $input['first_name'] . ' ' . $input['last_name'] . ' ' . $input['id_number'] . ' is volledig gevaccineerd en heeft de ' . $input['manufracturer'] . ' Booster ook genomen';
+        }
+        //  DR encrypt qr code 
+        $encrypted = Crypt::encryptString($input['id_number']);
+        $newQrcode = QRCode::text($encrypted)
+            ->setSize(8)
+            ->setMargin(2)
+            ->setOutfile($file)
+            ->png();
 
-         }elseif($input['status']=='2e Dose'){
-            $message= $input['first_name'].' '.$input['last_name'].' '.$input['id_number'].' is volledig gevaccineerd';
+        $pre = DB::table('vaccinatie')->insertGetid([
+            'first_name' => $input['first_name'],
+            'last_name' => $input['last_name'],
+            'birth_date' => $input['birth_date'],
+            'id_number' => $input['id_number'],
+            'manufracturer' => $input['manufracturer'],
+            'lot_number1' => $input['lot_number1'],
+            'date1' => $input['date1'],
+            'vaccinator1' => $input['vaccinator1'],
 
-         }elseif($input['status']=='Booster'){
-             $message= $input['first_name'].' '.$input['last_name'].' '.$input['id_number'].' is volledig gevaccineerd en heeft de '.$input['manufracturer'].' Booster ook genomen';
-          }
-          $newQrcode = QRCode::text($message)
-           ->setSize(8)
-           ->setMargin(2)
-           ->setOutfile($file)
-           ->png();
+            'lot_number2' => $input['lot_number2'],
+            'date2' => $input['date2'],
+            'vaccinator2' => $input['vaccinator2'],
 
-         $pre = DB :: table('vaccinatie')->insertGetid([
-             'first_name' =>$input['first_name'],
-             'last_name' =>$input['last_name'],
-             'birth_date' =>$input['birth_date'],
-             'id_number' =>$input['id_number'],
-             'manufracturer' =>$input['manufracturer'],
-             'lot_number1' =>$input['lot_number1'],
-             'date1' =>$input['date1'],
-             'vaccinator1'=>$input['vaccinator1'],
+            'lot_number3' => $input['lot_number3'],
+            'date3' => $input['date3'],
+            'vaccinator3' => $input['vaccinator3'],
 
-              'lot_number2' =>$input['lot_number2'],
-              'date2' =>$input['date2'],
-              'vaccinator2'=>$input['vaccinator2'],
+            'status' => $input['status'],
+            'qr_code' => $file,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
 
-              'lot_number3' =>$input['lot_number3'],
-              'date3' =>$input['date3'],
-              'vaccinator3'=>$input['vaccinator3'],
-
-             'status'=>$input['status'],
-             'qr_code'=>$file,
-             'created_at' =>date('Y-m-d H:i:s')
-         ]);
-
-//          return redirect()->route('vaccinatie.index')
-//                 ->with('success', 'Gebruiker succesvol aangemaakt.');
+                 return redirect()->route('vaccinatie.index')
+                        ->with('success', 'Gebruiker succesvol aangemaakt.');
     }
 
     /**
@@ -106,14 +107,14 @@ class VaccinationController extends Controller
     public function show($id)
     {
 
-            $data = DB :: table('vaccinatie as r')->select('r.*')
-            ->where('r.id',$id)
+        $data = DB::table('vaccinatie as r')->select('r.*')
+            ->where('r.id', $id)
             ->get();
-            return view('vaccinatie.show')->with('data',$data[0]);
+        return view('vaccinatie.show')->with('data', $data[0]);
 
 
-//         $data = Vaccinatie::findOrFail($id);
-//         return view('vaccinatie.show',compact('data'));
+        //         $data = Vaccinatie::findOrFail($id);
+        //         return view('vaccinatie.show',compact('data'));
     }
 
     /**
@@ -124,9 +125,9 @@ class VaccinationController extends Controller
      */
     public function edit($id)
     {
-        $data = DB :: table('vaccinatie as r')->select('r.*')
-         ->where('r.id',$id)
-         ->get();
+        $data = DB::table('vaccinatie as r')->select('r.*')
+            ->where('r.id', $id)
+            ->get();
 
 
         // Folder path to be flushed
@@ -134,17 +135,17 @@ class VaccinationController extends Controller
 
         // List of name of files inside
         // specified folder
-        $files = glob($folder_path.'/'.$data[0]->id_number.'.png');
+        $files = glob($folder_path . '/' . $data[0]->id_number . '.png');
 
         // Deleting all the files in the list
-        foreach($files as $file) {
+        foreach ($files as $file) {
 
-        if(is_file($file))
+            if (is_file($file))
 
-        // Delete the given file
-        unlink($file);
+                // Delete the given file
+                unlink($file);
         }
-        return view('vaccinatie.edit')->with('data',$data[0]);
+        return view('vaccinatie.edit')->with('data', $data[0]);
     }
 
     /**
@@ -157,39 +158,42 @@ class VaccinationController extends Controller
     public function update(Request $request, $id)
     {
 
-           $file = 'generated_qrcodes/'.$request['id_number'].'.png';
-           $message= 'hello123';
+        $file = 'generated_qrcodes/' . $request['id_number'] . '.png';
+        $message = 'hello123';
 
-          $newQrcode = QRCode::text($message)
+        //   $newQrcode = QRCode::text($message)
+        //  DR encrypt qr code 
+        $encrypted = Crypt::encryptString($request['id_number']);
+        $newQrcode = QRCode::text($encrypted)
             ->setSize(8)
             ->setMargin(2)
             ->setOutfile($file)
             ->png();
 
-         $data = DB :: table('vaccinatie')->update([
-             'first_name' =>$request['first_name'],
-             'last_name' =>$request['last_name'],
-             'birth_date' =>$request['birth_date'],
-             'id_number' =>$request['id_number'],
-             'manufracturer' =>$request['manufracturer'],
-             'lot_number1' =>$request['lot_number1'],
-             'date1' =>$request['date1'],
-             'vaccinator1'=>$request['vaccinator1'],
+        $data = DB::table('vaccinatie')->update([
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'birth_date' => $request['birth_date'],
+            'id_number' => $request['id_number'],
+            'manufracturer' => $request['manufracturer'],
+            'lot_number1' => $request['lot_number1'],
+            'date1' => $request['date1'],
+            'vaccinator1' => $request['vaccinator1'],
 
-              'lot_number2' =>$request['lot_number2'],
-              'date2' =>$request['date2'],
-              'vaccinator2'=>$request['vaccinator2'],
+            'lot_number2' => $request['lot_number2'],
+            'date2' => $request['date2'],
+            'vaccinator2' => $request['vaccinator2'],
 
-              'lot_number3' =>$request['lot_number3'],
-              'date3' =>$request['date3'],
-              'vaccinator3'=>$request['vaccinator3'],
+            'lot_number3' => $request['lot_number3'],
+            'date3' => $request['date3'],
+            'vaccinator3' => $request['vaccinator3'],
 
-             'status'=>$request['status'],
-             'qr_code'=>$file,
-             'created_at' =>date('Y-m-d H:i:s')
-         ]);
-         return redirect()->route('vaccinatie.index')
-            ->with('success','Gebruiker gegevens zijn succesvol gewijzigd.');
+            'status' => $request['status'],
+            'qr_code' => $file,
+            'created_at' => date('Y-m-d H:i:s')
+        ]);
+        return redirect()->route('vaccinatie.index')
+            ->with('success', 'Gebruiker gegevens zijn succesvol gewijzigd.');
     }
 
     /**
