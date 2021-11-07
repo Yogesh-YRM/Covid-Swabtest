@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('QR','App\Http\Controllers\ApiController@QRvalidation')->name('QRvalidation');
+Route::post('vaccinatieQR','App\Http\Controllers\ApiController@vaccinatie_QRvalidation')->name('vaccinatie_QRvalidation');
+Route::post('PCRQR','App\Http\Controllers\ApiController@PCR_QRvalidation')->name('PCR_QRvalidation');

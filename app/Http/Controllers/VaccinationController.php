@@ -94,8 +94,8 @@ class VaccinationController extends Controller
             'created_at' => date('Y-m-d H:i:s')
         ]);
 
-                 return redirect()->route('vaccinatie.index')
-                        ->with('success', 'Gebruiker succesvol aangemaakt.');
+        return redirect()->route('vaccinatie.index')
+            ->with('success', 'Gebruiker succesvol aangemaakt.');
     }
 
     /**
@@ -170,7 +170,7 @@ class VaccinationController extends Controller
             ->setOutfile($file)
             ->png();
 
-        $data = DB::table('vaccinatie')->update([
+        $data = DB::table('vaccinatie')->where('id', $id)->update([
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
             'birth_date' => $request['birth_date'],

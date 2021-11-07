@@ -51,7 +51,7 @@
               <div class="card">
                 <div class="card-body">
                     <div class=" text-center">
-                      <img src="{{ asset($data->qr_code) }}"  class="rounded float-center" alt="...">
+                      <img  style="height:200px"src="{{ asset($data->qr_code) }}"  class="rounded float-center" alt="...">
                    </div>
                 </div>
               </div>
