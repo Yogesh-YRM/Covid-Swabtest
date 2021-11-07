@@ -13,15 +13,15 @@
              <div class="col-sm-3">
                 <select id="" class='form-control' name= "resultaatfilter" >
                 <option value="">Selecteer resultaat</option>
-                <option value="positief">Positief</option>
-                <option value="negatief">Negatief</option>
+                <option value="positief" <?php if ($_GET['resultaatfilter'] == "positief") { echo ' selected="selected"'; } ?>>Positief</option>
+                <option value="negatief" <?php if($_GET['resultaatfilter'] == "negatief") { echo ' selected="selected"'; }?>>Negatief</option>
                 </select>
             </div>
          <div class="col-sm-3 ">
                 <select id="" class='form-control' name= "vaxfilter"  >
                 <option value="">Selecteer gevaccineerd</option>
-                <option value="wel">Wel</option>
-                <option value="niet">Niet</option>
+                <option value="wel" <?php if($_GET['vaxfilter'] == "wel") { echo ' selected="selected"'; }?>>Wel</option>
+                <option value="niet" <?php if($_GET['vaxfilter'] == "niet") { echo ' selected="selected"'; }?>>Niet</option>
                 </select>
             </div>
          <div class="col-sm-3 ">
@@ -29,7 +29,7 @@
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </div>
-                    <input type="text" class="form-control pull-right" id="report_result" value="" name="resultdatefilter">
+                    <input type="text" class="form-control pull-right" id="report_result" value="{{$activedate ?? ''}}" name="resultdatefilter">
             </div>
          </div>
          

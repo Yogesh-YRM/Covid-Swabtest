@@ -179,8 +179,8 @@ $smsresult = DB::table('registratie as r')->select('r.*','res.*','res.created_at
     {
         $input = $request->all();
         // dd($input);
-        $resultaten = DB::table('registratie as r')->select('r.*','res.*','res.created_at as today')
-        ->leftjoin('result as res','r.id','res.registration_id');
+        $resultaten = DB::table('result as res')->select('r.*','res.*','res.created_at as today')
+        ->leftjoin('registratie as r','r.id','res.registration_id');
         // dd($resultaten);
 
 
@@ -217,7 +217,8 @@ $smsresult = DB::table('registratie as r')->select('r.*','res.*','res.created_at
     
                 $resultaten =  $resultaten->get();
 
-                return view('adminregistratie.resultaatoverzicht')->with('resultaten',$resultaten);
+                return view('adminregistratie.resultaatoverzicht')->with('resultaten',$resultaten)
+                ->with('activedate',$input['resultdatefilter']);
                    
             }
             $resultaten =  $resultaten->get();
