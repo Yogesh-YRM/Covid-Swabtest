@@ -12,16 +12,16 @@
         <div class="row col-sm-12">
              <div class="col-sm-3">
                 <select id="" class='form-control' name= "resultaatfilter" >
-                <option value="">Selecteer resultaat</option>
-                <option value="positief" <?php if ($_GET['resultaatfilter'] == "positief") { echo ' selected="selected"'; } ?>>Positief</option>
-                <option value="negatief" <?php if($_GET['resultaatfilter'] == "negatief") { echo ' selected="selected"'; }?>>Negatief</option>
+                <option value="" >Selecteer resultaat</option>
+                <option value="positief" <?php if(isset($_GET['resultaatfilter']) == "positief") { echo ' selected="selected"'; } ?>>Positief</option>
+                <option value="negatief" <?php if(isset($_GET['resultaatfilter']) == "negatief") { echo ' selected="selected"'; }?>>Negatief</option>
                 </select>
             </div>
          <div class="col-sm-3 ">
                 <select id="" class='form-control' name= "vaxfilter"  >
-                <option value="">Selecteer gevaccineerd</option>
-                <option value="wel" <?php if($_GET['vaxfilter'] == "wel") { echo ' selected="selected"'; }?>>Wel</option>
-                <option value="niet" <?php if($_GET['vaxfilter'] == "niet") { echo ' selected="selected"'; }?>>Niet</option>
+                <option value="" >Selecteer gevaccineerd</option>
+                <option value="wel" <?php if(isset($_GET['vaxfilter']) == "wel") { echo ' selected="selected"'; }?>>Wel</option>
+                <option value="niet" <?php if(isset($_GET['vaxfilter']) == "niet") { echo ' selected="selected"'; }?>>Niet</option>
                 </select>
             </div>
          <div class="col-sm-3 ">

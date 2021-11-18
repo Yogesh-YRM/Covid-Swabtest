@@ -3,6 +3,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
+
 
 <?php
 use Illuminate\Support\Facades\DB;
@@ -64,7 +66,7 @@ $location = DB:: table('locations')->select('*')->get();
      <div class="form-group row">
          <label for="" class="col-sm-2 col-form-label">Telefoon<r style="color:red;">*</r></label>
          <div class="col-sm-10">
-           <input type="text" name="phonenumber" class="form-control" id="" placeholder="">
+           <input type="text" name="phonenumber" class="form-control" size="100" id="phone" placeholder="">
          </div>
        </div>
        <div class="form-group row">
@@ -105,5 +107,22 @@ $location = DB:: table('locations')->select('*')->get();
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput.min.js"></script>
+    <script>
+    // Vanilla Javascript
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input,({
+      // options here
+    }));
+ 
+    $(document).ready(function() {
+        $('.iti__flag-container').click(function() { 
+          var countryCode = $('.iti__selected-flag').attr('title');
+          var countryCode = countryCode.replace(/[^0-9]/g,'')
+          $('#phone').val("");
+          $('#phone').val("+"+countryCode+ $('#phone').val());
+       });
+    });
+    </script>
   
 </div>

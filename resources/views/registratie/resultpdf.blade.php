@@ -9,30 +9,31 @@
 <html>
 
 <head>
-<div id = "content">
+<!-- <div id = ""> -->
 
 </head>
 
 <body>
     </br>
-
+<div>
     <h2 class="header" style = " text-align: center; font-size: 50px; font-family: Verdana, Geneva, Tahoma, sans-serif;border-bottom:20px solid green;
             text-align: center;";>PCR Resultaat</h2>
-
-    <div id="" style = "text-align:center;"><img src="generated_qrcodes/FR0015M.png"  alt="qrcode"></div>
+</div>
+    <div id="" style = "text-align:center;"><img src="{{asset('generated_qrcodes'.'/'.$result->qr_code)}}"  alt="qrcode"></div>
+    
 
         <table class="table ">
             <tr>
                 <th>Naam:</th>
-                <td>John Doe</td>
+                <td>{{$result->lastname}}</td>
                 <th>ID-nummer:</th>
-                <td>FS340009</td>
+                <td>{{$result->id_number}}</td>
             </tr>
             <tr>
                 <th>Datum Resultaat:</th>
-                <td>10-05-2021</td>
+                <td>{{$result->created_at}}</td>
                 <th>Resultaat</th>
-                <td>Negatief</td>
+                <td>{{$result->result}}</td>
             </tr>
     </table>
     <div style = "text-align:center;">
@@ -44,25 +45,25 @@
    </p>
     </div>
     </div>
-    <div id="editor"></div>
-<button id="cmd">Download PDF File</button>
+    <!-- <div id="editor"></div>
+<button id="cmd">Download PDF File</button> -->
 
 
     <script>
-   var doc = new jsPDF();
-    var specialElementHandlers = {
-        '#editor': function (element, renderer) {
-            return true;
-        }
-    };
+//    var doc = new jsPDF();
+//     var specialElementHandlers = {
+//         '#editor': function (element, renderer) {
+//             return true;
+//         }
+//     };
 
-    $('#cmd').click(function () {
-        doc.fromHTML($('#content').html(), 15, 15, {
-            'width': 170,
-                'elementHandlers': specialElementHandlers
-        });
-        doc.save('sample-file.pdf');
-    });
+//     $('#cmd').click(function () {
+//         doc.fromHTML($('#content').html(), 15, 15, {
+//             'width': 170,
+//                 'elementHandlers': specialElementHandlers
+//         });
+//         doc.save('sample-file.pdf');
+//     });
     </script>
  
 

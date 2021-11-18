@@ -101,6 +101,8 @@ class RegisterController extends Controller
             'location' => 'required',
         ]);
         $input = $request->all();
+        dd($input);
+        exit();
 
         $pre = DB :: table('registratie')->insertGetid([
             'firstname' =>$input['firstname'],
@@ -118,8 +120,12 @@ class RegisterController extends Controller
     return redirect (route('registeren.show',[$pre]));
     }
 
-    public function result_pdf()
+    public function result_pdf($id)
     {
-        return view('registratie.resultpdf');
+        $result = DB::table('result as res')->select('res.*','r.*')
+        ->leftjoin('registratie as r','r.id','res.registration_id')
+        ->where('r.id_number',$id)->get();
+        
+        return view('registratie.resultpdf')->with('result',$result[0]);
     }
 }

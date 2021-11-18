@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Twilio\Rest\Client;
+<<<<<<< Updated upstream
+=======
+use Flash;
+>>>>>>> Stashed changes
 use QRCode;
 use Illuminate\Support\Facades\Crypt;
 
@@ -133,6 +137,7 @@ class AdminRegisterController extends Controller
     {
 
         require '../twilio/vendor/autoload.php';
+<<<<<<< Updated upstream
 
 
 
@@ -159,15 +164,42 @@ class AdminRegisterController extends Controller
             ->leftjoin('result as res', 'r.id', 'res.registration_id')
             ->where('res.id', $result)->get();
         ################################ LIVE KEYS #####################################
+=======
+        
+        $file = 'generated_qrcodes/pcr' . $id . '-'.$result. '.png';
+
+        $result = DB ::table('result')->insertGetid([
+            'registration_id' => $id,
+            'result' => $result,
+            'qr_code' =>$file,
+            'created_at' => date('Y-m-d H:i:s')
+             ]);
+        $reg = DB:: table('registratie')->where('id',$id)->update([
+ 
+             'status'=>"afgehandeld"
+             ]);
+         $encrypted = Crypt::encryptString($result);
+         $newQrcode = QRCode::text($encrypted)
+             ->setSize(8)
+             ->setMargin(2)
+             ->setOutfile($file)
+             ->png();
+
+            
+$smsresult = DB::table('registratie as r')->select('r.*','res.*','res.created_at as today')
+->leftjoin('result as res','r.id','res.registration_id')
+->where('res.id',$result)->get();
+            ################################ LIVE KEYS #####################################
+>>>>>>> Stashed changes
         // $account_sid = 'AC46041e1c4e91caee7c9949243e1a1e29';
-        // $auth_token = '7c732613583fe910988cc2c8b0ec0240';
+        // $auth_token = '7fdbfdb';
         // $twilio_number = '+15703768094';
         // $receiver = 
         ################################################################################
 
         ################################ TEST KEYS #####################################
         $account_sid = 'AC5a9222e8258ab965b073b8df8a9211c7';
-        $auth_token = 'e9c21e06bde59a38d4bbaa3785888c2a';
+        $auth_token = 'dssbfbfbd';
         $twilio_number = '+18143998410';
         $receiver = '+5978920264';
         ################################################################################
@@ -179,7 +211,11 @@ class AdminRegisterController extends Controller
             $receiver,
             array(
                 'from' => $twilio_number,
+<<<<<<< Updated upstream
                 'body' => 'Beste ' . $smsresult[0]->lastname . ', U bent ' . $smsresult[0]->result . ' getest. Het bewijs vindt u op de volgende link team13.app.sr'
+=======
+                'body' => 'Beste ' .$smsresult[0]->lastname.', U bent '.$smsresult[0]->result.' getest. Het bewijs vindt u op de volgende link team13.app.sr/result_pdf/'.$smsresult[0]->id_number
+>>>>>>> Stashed changes
             )
         );
 
@@ -189,6 +225,7 @@ class AdminRegisterController extends Controller
     public function resultaatoverzicht(Request $request)
     {
         $input = $request->all();
+<<<<<<< Updated upstream
         // dd($input);
         $resultaten = DB::table('result as res')->select('r.*', 'res.*', 'res.created_at as today')
             ->leftjoin('registratie as r', 'r.id', 'res.registration_id');
@@ -197,6 +234,11 @@ class AdminRegisterController extends Controller
         // dd($resultaten);
         $resultaten = DB::table('result as res')->select('r.*', 'res.*', 'res.created_at as today')
             ->leftjoin('registratie as r', 'r.id', 'res.registration_id');
+=======
+
+        $resultaten = DB::table('result as res')->select('r.*','res.*','res.created_at as today')
+        ->leftjoin('registratie as r','r.id','res.registration_id');
+>>>>>>> Stashed changes
 
         if (isset($input['resultfilter'])) {
 

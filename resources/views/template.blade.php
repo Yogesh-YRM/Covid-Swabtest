@@ -92,6 +92,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
     <script>
         
 
@@ -124,6 +125,22 @@ function yesnoCheckcreate(that) {
             });
         });
     </script>
+    <script>
+    // Vanilla Javascript
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input,({
+      // options here
+    }));
+ 
+    $(document).ready(function() {
+        $('.iti__flag-container').click(function() { 
+          var countryCode = $('.iti__selected-flag').attr('title');
+          var countryCode = countryCode.replace(/[^0-9]/g,'')
+          $('#phone').val("");
+          $('#phone').val("+"+countryCode+" "+ $('#phone').val());
+       });
+    });
+  </script>
 </body>
 
 </html>

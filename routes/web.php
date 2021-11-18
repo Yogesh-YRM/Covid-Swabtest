@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 Route::resource('registeren','App\Http\Controllers\RegisterController');
 Route::post('pre_registration','App\Http\Controllers\RegisterController@preregister')->name('preregister');
-Route::get('result_pdf','App\Http\Controllers\RegisterController@result_pdf')->name('result_pdf');
+Route::get('result_pdf/{id}','App\Http\Controllers\RegisterController@result_pdf')->name('result_pdf');
 
 Route::group([
     'prefix'=>config('admin.prefix'),
