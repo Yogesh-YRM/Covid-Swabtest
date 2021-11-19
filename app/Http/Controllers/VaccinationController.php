@@ -63,7 +63,7 @@ class VaccinationController extends Controller
         } elseif ($input['status'] == 'Booster') {
             $message = $input['first_name'] . ' ' . $input['last_name'] . ' ' . $input['id_number'] . ' is volledig gevaccineerd en heeft de ' . $input['manufracturer'] . ' Booster ook genomen';
         }
-        //  DR encrypt qr code 
+        //  DR encrypt qr code
         $encrypted = Crypt::encryptString($input['id_number']);
         $newQrcode = QRCode::text($encrypted)
             ->setSize(8)
@@ -111,10 +111,6 @@ class VaccinationController extends Controller
             ->where('r.id', $id)
             ->get();
         return view('vaccinatie.show')->with('data', $data[0]);
-
-
-        //         $data = Vaccinatie::findOrFail($id);
-        //         return view('vaccinatie.show',compact('data'));
     }
 
     /**
@@ -157,12 +153,9 @@ class VaccinationController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $file = 'generated_qrcodes/' . $request['id_number'] . '.png';
-        $message = 'hello123';
 
-        //   $newQrcode = QRCode::text($message)
-        //  DR encrypt qr code 
+        //  DR encrypt qr code
         $encrypted = Crypt::encryptString($request['id_number']);
         $newQrcode = QRCode::text($encrypted)
             ->setSize(8)

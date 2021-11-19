@@ -5,7 +5,7 @@
    <div class="row">
        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
            <div class="pull-left">
-               <h2>Nieuwe gebruiker toevoegen</h2>
+               <h2>Nieuwe gebruiker vaccineren</h2>
            </div>
        </div>
    </div>

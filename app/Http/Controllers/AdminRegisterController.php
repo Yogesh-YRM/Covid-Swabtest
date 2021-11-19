@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Twilio\Rest\Client;
-<<<<<<< Updated upstream
-=======
 use Flash;
->>>>>>> Stashed changes
 use QRCode;
 use Illuminate\Support\Facades\Crypt;
 
@@ -135,12 +132,7 @@ class AdminRegisterController extends Controller
 
     public function result($id, $result)
     {
-
         require '../twilio/vendor/autoload.php';
-<<<<<<< Updated upstream
-
-
-
 
         $result = DB::table('result')->insertGetid([
             'registration_id' => $id,
@@ -159,13 +151,13 @@ class AdminRegisterController extends Controller
             ->setMargin(2)
             ->setOutfile($file)
             ->png();
-            
+
         $smsresult = DB::table('registratie as r')->select('r.*', 'res.*', 'res.created_at as today')
             ->leftjoin('result as res', 'r.id', 'res.registration_id')
             ->where('res.id', $result)->get();
         ################################ LIVE KEYS #####################################
-=======
-        
+
+
         $file = 'generated_qrcodes/pcr' . $id . '-'.$result. '.png';
 
         $result = DB ::table('result')->insertGetid([
@@ -175,7 +167,7 @@ class AdminRegisterController extends Controller
             'created_at' => date('Y-m-d H:i:s')
              ]);
         $reg = DB:: table('registratie')->where('id',$id)->update([
- 
+
              'status'=>"afgehandeld"
              ]);
          $encrypted = Crypt::encryptString($result);
@@ -185,16 +177,16 @@ class AdminRegisterController extends Controller
              ->setOutfile($file)
              ->png();
 
-            
-$smsresult = DB::table('registratie as r')->select('r.*','res.*','res.created_at as today')
-->leftjoin('result as res','r.id','res.registration_id')
-->where('res.id',$result)->get();
+
+         $smsresult = DB::table('registratie as r')->select('r.*','res.*','res.created_at as today')
+          ->leftjoin('result as res','r.id','res.registration_id')
+          ->where('res.id',$result)->get();
             ################################ LIVE KEYS #####################################
->>>>>>> Stashed changes
+
         // $account_sid = 'AC46041e1c4e91caee7c9949243e1a1e29';
         // $auth_token = '7fdbfdb';
         // $twilio_number = '+15703768094';
-        // $receiver = 
+        // $receiver =
         ################################################################################
 
         ################################ TEST KEYS #####################################
@@ -211,11 +203,8 @@ $smsresult = DB::table('registratie as r')->select('r.*','res.*','res.created_at
             $receiver,
             array(
                 'from' => $twilio_number,
-<<<<<<< Updated upstream
-                'body' => 'Beste ' . $smsresult[0]->lastname . ', U bent ' . $smsresult[0]->result . ' getest. Het bewijs vindt u op de volgende link team13.app.sr'
-=======
                 'body' => 'Beste ' .$smsresult[0]->lastname.', U bent '.$smsresult[0]->result.' getest. Het bewijs vindt u op de volgende link team13.app.sr/result_pdf/'.$smsresult[0]->id_number
->>>>>>> Stashed changes
+
             )
         );
 
@@ -225,7 +214,7 @@ $smsresult = DB::table('registratie as r')->select('r.*','res.*','res.created_at
     public function resultaatoverzicht(Request $request)
     {
         $input = $request->all();
-<<<<<<< Updated upstream
+
         // dd($input);
         $resultaten = DB::table('result as res')->select('r.*', 'res.*', 'res.created_at as today')
             ->leftjoin('registratie as r', 'r.id', 'res.registration_id');
@@ -234,11 +223,11 @@ $smsresult = DB::table('registratie as r')->select('r.*','res.*','res.created_at
         // dd($resultaten);
         $resultaten = DB::table('result as res')->select('r.*', 'res.*', 'res.created_at as today')
             ->leftjoin('registratie as r', 'r.id', 'res.registration_id');
-=======
+
 
         $resultaten = DB::table('result as res')->select('r.*','res.*','res.created_at as today')
         ->leftjoin('registratie as r','r.id','res.registration_id');
->>>>>>> Stashed changes
+
 
         if (isset($input['resultfilter'])) {
 

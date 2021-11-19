@@ -40,11 +40,9 @@
                        <li class="nav-item">
                           <a href="{{ route('vaccinatie.index') }}" class="nav-link">Vaccinatie</a>
                        </li>
-                    @endcan
-                    @can('role','admin')
-                    <li class="nav-item">
-                        <a href="{{ route('admin') }}" class="nav-link">Data Admin</a>
-                    </li>
+                       <li class="nav-item">
+                           <a href="{{ route('users.index') }}" class="nav-link">Gebruikers</a>
+                       </li>
                     @endcan
                     @can('role',['admin','editor'])
                     <li class="nav-item">
@@ -59,7 +57,7 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" data-toggle="dropdown">QR Scanner</a>
                         <div class="dropdown-menu dropdown-menu-right">
-                         
+
                             <a href="/authorize/vaccinatie-eqrscanner" class="dropdown-item">Vaccinatie QR Scanner</a>
                             <a href="/authorize/pcr-qrscanner" class="dropdown-item">PCR QR Scanner</a>
                         </div>
@@ -94,7 +92,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script>
-        
+
 
     function yesnoCheck(that) {
     if (that.value == "wel") {
@@ -131,9 +129,9 @@ function yesnoCheckcreate(that) {
     window.intlTelInput(input,({
       // options here
     }));
- 
+
     $(document).ready(function() {
-        $('.iti__flag-container').click(function() { 
+        $('.iti__flag-container').click(function() {
           var countryCode = $('.iti__selected-flag').attr('title');
           var countryCode = countryCode.replace(/[^0-9]/g,'')
           $('#phone').val("");

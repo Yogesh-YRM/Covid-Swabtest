@@ -11,33 +11,33 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name',
+        'voornaam',
+        'achternaam',
+        'geboorte_datum',
+        'adress',
+        'id_nummer',
+        'mobiel',
         'email',
-        'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
-        'password',
-        'remember_token',
+
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+
+    public function up()
+{
+      Schema::create('users', function (Blueprint $table) {
+                $table->id();
+                $table->string('voornaam');
+                $table->string('achternaam');
+                $table->string('geboorte_datum');
+                $table->string('adress');
+                $table->string('id_nummer');
+                $table->string('mobiel');
+                $table->string('email')->unique();
+                $table->timestamps();
+            });
+}
 }

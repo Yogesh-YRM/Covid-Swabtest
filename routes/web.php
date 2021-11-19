@@ -34,9 +34,10 @@ Route::group([
     Route::middleware(['auth:admin'])->group(function () {
         Route::post('logout','LoginAdminController@logout')->name('admin.logout');
         Route::view('/','dashboard')->name('dashboard');
-        Route::view('/admin','data-admin')->name('admin')->middleware('can:role,"admin"');
+//         Route::view('/admin','data-admin')->name('admin')->middleware('can:role,"admin"');
 
         Route::resource('authorizeUsers', 'AuthorizeUsersController');
+        Route::resource('users', 'UsersController');
         Route::resource('vaccinatie', 'VaccinationController');
         Route::resource('adminregistratie','AdminRegisterController');
         Route::get('result/{id}/{result}','AdminRegisterController@result')->name('result');
