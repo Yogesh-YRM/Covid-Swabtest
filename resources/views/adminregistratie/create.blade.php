@@ -26,31 +26,31 @@
     <div class="form-group row">
        <label for="" class="col-sm-2 col-form-label">Voornaam<r style="color:red;">*</r></label>
          <div class="col-sm-4">
-            <input type="text" name ="firstname" class="form-control" id="" placeholder="">
+            <input type="text" name ="firstname" id="voornaam" class="form-control" id="" placeholder="">
          </div>
          <label for="" class="col-sm-2 col-form-label">Familienaam<r style="color:red;">*</r></label>
          <div class="col-sm-4">
-            <input type="text" name="lastname" class="form-control" id="" placeholder="">
+            <input type="text" name="lastname" id="familienaam" class="form-control" id="" placeholder="">
          </div>
     </div>
     <div class="form-group row">
          <label for="" class="col-sm-2 col-form-label">ID-Nummer<r style="color:red;">*</r></label>
          <div class="col-sm-4">
-           <input type="text" name="id_number" class="form-control" id="" placeholder="">
+           <input type="text" name="id_number" id="searchid" class="form-control" id="" placeholder="">
          </div>
          <label for="" class="col-sm-2 col-form-label">Geboorte datum<r style="color:red;">*</r></label>
          <div class="col-sm-4">
-           <input type="date" name="birthdate" class="form-control" id="" placeholder="">
+           <input type="date" name="birthdate" id = "geb_datum" class="form-control" id="" placeholder="">
          </div>
        </div>
        <div class="form-group row">
          <label for="" class="col-sm-2 col-form-label">Adres<r style="color:red;">*</r></label>
          <div class="col-sm-4">
-           <input type="text" name="adress" class="form-control" id="" placeholder="">
+           <input type="text" name="adress" class="form-control" id="adres" placeholder="">
          </div>
          <label for="" class="col-sm-2 col-form-label">Telefoon<r style="color:red;">*</r></label>
          <div class="col-sm-4">
-           <input type="text" name="phonenumber" class="form-control" id="" placeholder="">
+           <input type="text" name="phonenumber" class="form-control" id="telefoon" placeholder="">
          </div>
        </div>
        <div class="form-group row">

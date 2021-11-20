@@ -139,6 +139,46 @@ function yesnoCheckcreate(that) {
        });
     });
   </script>
+  <script>
+       $(document).ready(function() {
+                $('#searchid').on('keyup', function() {
+                    var id = $("#searchid").val();
+                    console.log(id);
+                    $.ajax('{{URL::to('/')}}/authorize/adminregistratie/create/finduser?q='+id, // request url
+                        {
+                            success: function(data, status, xhr) { // success callback function
+                                
+                                data = JSON.parse(data);
+                                // console.log(data);
+                                
+
+                                var voornaam = '';
+                                var familienaam = '';
+                                var geb_datum = '';
+                                var adres = '';
+                                var telefoon = '';
+                                $.each(data, function(index, val){
+                                 voornaam = val.firstname;
+                                 familienaam = val.lastname;
+                                 geb_datum = val.birthdate;
+                                 adres = val.address;
+                                 telefoon = val.phonenumber;
+                                });
+                                console.log(voornaam);
+
+                                $("#voornaam").val(voornaam);
+                                $("#familienaam").val(familienaam);
+                                $("#geb_datum").val(geb_datum);
+                                $("#adres").val(adres);
+                                $("#telefoon").val(telefoon);
+                               
+                            }
+
+                });
+
+            });
+        });
+      </script>
 </body>
 
 </html>

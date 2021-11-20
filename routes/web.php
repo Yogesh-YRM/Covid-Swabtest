@@ -40,6 +40,7 @@ Route::group([
         Route::resource('users', 'UsersController');
         Route::resource('vaccinatie', 'VaccinationController');
         Route::resource('adminregistratie','AdminRegisterController');
+        Route::get('/adminregistratie/create/finduser','AdminRegisterController@finduser')->name('finduser');
         Route::get('result/{id}/{result}','AdminRegisterController@result')->name('result');
         Route::get('resultaten','AdminRegisterController@resultaatoverzicht')->name('resultaatoverzicht');
 

@@ -236,4 +236,12 @@ class AdminRegisterController extends Controller
         $resultaten =  $resultaten->get();
         return view('adminregistratie.resultaatoverzicht')->with('resultaten', $resultaten);
     }
+    public function finduser(Request $request)
+    {
+        $input = $request->all();
+
+        $registraties = DB::table('registratie')->select('*')->where('id_number','like','%'.$input['q'].'%')->get();
+        return json_encode($registraties);
+
+    }
 }
