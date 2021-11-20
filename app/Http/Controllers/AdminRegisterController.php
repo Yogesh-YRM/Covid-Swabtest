@@ -134,28 +134,6 @@ class AdminRegisterController extends Controller
     {
         require '../twilio/vendor/autoload.php';
 
-        $result = DB::table('result')->insertGetid([
-            'registration_id' => $id,
-            'result' => $result,
-            'created_at' => date('Y-m-d H:i:s')
-        ]);
-        $reg = DB::table('registratie')->where('id', $id)->update([
-
-            'status' => "afgehandeld"
-        ]);
-        //DR generate QR
-        $file = 'generated_qrcodes/pcr' . $id . '-' . $result . '.png';
-        $encrypted = Crypt::encryptString($id);
-        $newQrcode = QRCode::text($encrypted)
-            ->setSize(8)
-            ->setMargin(2)
-            ->setOutfile($file)
-            ->png();
-
-        $smsresult = DB::table('registratie as r')->select('r.*', 'res.*', 'res.created_at as today')
-            ->leftjoin('result as res', 'r.id', 'res.registration_id')
-            ->where('res.id', $result)->get();
-        ################################ LIVE KEYS #####################################
 
 
         $file = 'generated_qrcodes/pcr' . $id . '-'.$result. '.png';
@@ -214,16 +192,6 @@ class AdminRegisterController extends Controller
     public function resultaatoverzicht(Request $request)
     {
         $input = $request->all();
-
-        // dd($input);
-        $resultaten = DB::table('result as res')->select('r.*', 'res.*', 'res.created_at as today')
-            ->leftjoin('registratie as r', 'r.id', 'res.registration_id');
-        // $resultaten = DB::table('registratie as r')->select('r.*','res.*','res.created_at as today')
-        // ->leftjoin('result as res','r.id','res.registration_id');
-        // dd($resultaten);
-        $resultaten = DB::table('result as res')->select('r.*', 'res.*', 'res.created_at as today')
-            ->leftjoin('registratie as r', 'r.id', 'res.registration_id');
-
 
         $resultaten = DB::table('result as res')->select('r.*','res.*','res.created_at as today')
         ->leftjoin('registratie as r','r.id','res.registration_id');
