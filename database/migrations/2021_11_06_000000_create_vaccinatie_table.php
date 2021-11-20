@@ -15,10 +15,10 @@ class CreateVaccinatieTable extends Migration
     {
         Schema::create('vaccinatie', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('birth_date');
-            $table->string('id_number');
+            $table->string('user_id');
+            // $table->string('last_name');
+            // $table->string('birth_date');
+            // $table->string('id_number');
 
             $table->string('manufracturer');
 

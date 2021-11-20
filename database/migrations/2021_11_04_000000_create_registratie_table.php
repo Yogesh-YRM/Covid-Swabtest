@@ -15,11 +15,11 @@ class CreateRegistratieTable extends Migration
     {
         Schema::create('registratie', function (Blueprint $table) {
             $table->id();
-            $table->string('firstname')->nullable();
-            $table->string('lastname')->nullable();
-            $table->string('phonenumber')->nullable();
-            $table->string('adress')->nullable();
-            $table->string('id_number')->nullable();
+            $table->string('user_id')->nullable();
+            // $table->string('lastname')->nullable();
+            // $table->string('phonenumber')->nullable();
+            // $table->string('adress')->nullable();
+            // $table->string('id_number')->nullable();
             $table->string('opmerking')->nullable();
             $table->integer('location')->nullable();
             $table->string('status')->nullable();
@@ -27,7 +27,7 @@ class CreateRegistratieTable extends Migration
             $table->string('saturation')->nullable();
             $table->string('vax')->nullable();
             $table->string('bp')->nullable();
-            $table->string('birthdate')->nullable();
+            // $table->string('birthdate')->nullable();
             $table->timestamps();
         });
     }
