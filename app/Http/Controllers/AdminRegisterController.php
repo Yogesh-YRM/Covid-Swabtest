@@ -136,30 +136,29 @@ class AdminRegisterController extends Controller
 
 
 
-        $file = 'generated_qrcodes/pcr' . $id . '-'.$result. '.png';
+        $file = 'generated_qrcodes/pcr' . $id . '-' . $result . '.png';
 
-        $result = DB ::table('result')->insertGetid([
+        $result = DB::table('result')->insertGetid([
             'registration_id' => $id,
             'result' => $result,
-            'qr_code' =>$file,
+            'qr_code' => $file,
             'created_at' => date('Y-m-d H:i:s')
-             ]);
-        $reg = DB:: table('registratie')->where('id',$id)->update([
+        ]);
+        $reg = DB::table('registratie')->where('id', $id)->update([
+            'status' => "afgehandeld"
+        ]);
+        $encrypted = Crypt::encryptString('pcr_'.$result);
+        $newQrcode = QRCode::text($encrypted)
+            ->setSize(8)
+            ->setMargin(2)
+            ->setOutfile($file)
+            ->png();
 
-             'status'=>"afgehandeld"
-             ]);
-         $encrypted = Crypt::encryptString($result);
-         $newQrcode = QRCode::text($encrypted)
-             ->setSize(8)
-             ->setMargin(2)
-             ->setOutfile($file)
-             ->png();
 
-
-         $smsresult = DB::table('registratie as r')->select('r.*','res.*','res.created_at as today')
-          ->leftjoin('result as res','r.id','res.registration_id')
-          ->where('res.id',$result)->get();
-            ################################ LIVE KEYS #####################################
+        $smsresult = DB::table('registratie as r')->select('r.*', 'res.*', 'res.created_at as today')
+            ->leftjoin('result as res', 'r.id', 'res.registration_id')
+            ->where('res.id', $result)->get();
+        ################################ LIVE KEYS #####################################
 
         // $account_sid = 'AC46041e1c4e91caee7c9949243e1a1e29';
         // $auth_token = '7fdbfdb';
@@ -181,7 +180,7 @@ class AdminRegisterController extends Controller
             $receiver,
             array(
                 'from' => $twilio_number,
-                'body' => 'Beste ' .$smsresult[0]->lastname.', U bent '.$smsresult[0]->result.' getest. Het bewijs vindt u op de volgende link team13.app.sr/result_pdf/'.$smsresult[0]->id_number
+                'body' => 'Beste ' . $smsresult[0]->lastname . ', U bent ' . $smsresult[0]->result . ' getest. Het bewijs vindt u op de volgende link team13.app.sr/result_pdf/' . $smsresult[0]->id_number
 
             )
         );
@@ -193,8 +192,8 @@ class AdminRegisterController extends Controller
     {
         $input = $request->all();
 
-        $resultaten = DB::table('result as res')->select('r.*','res.*','res.created_at as today')
-        ->leftjoin('registratie as r','r.id','res.registration_id');
+        $resultaten = DB::table('result as res')->select('r.*', 'res.*', 'res.created_at as today')
+            ->leftjoin('registratie as r', 'r.id', 'res.registration_id');
 
 
         if (isset($input['resultfilter'])) {
@@ -240,8 +239,7 @@ class AdminRegisterController extends Controller
     {
         $input = $request->all();
 
-        $registraties = DB::table('registratie')->select('*')->where('id_number','like','%'.$input['q'].'%')->get();
+        $registraties = DB::table('registratie')->select('*')->where('id_number', 'like', '%' . $input['q'] . '%')->get();
         return json_encode($registraties);
-
     }
 }
