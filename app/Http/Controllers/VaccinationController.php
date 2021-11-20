@@ -64,7 +64,7 @@ class VaccinationController extends Controller
             $message = $input['first_name'] . ' ' . $input['last_name'] . ' ' . $input['id_number'] . ' is volledig gevaccineerd en heeft de ' . $input['manufracturer'] . ' Booster ook genomen';
         }
         //  DR encrypt qr code
-        $encrypted = Crypt::encryptString($input['id_number']);
+        $encrypted = Crypt::encryptString('vax_'.$input['id_number']);
         $newQrcode = QRCode::text($encrypted)
             ->setSize(8)
             ->setMargin(2)

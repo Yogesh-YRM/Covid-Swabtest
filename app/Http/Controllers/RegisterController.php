@@ -101,8 +101,8 @@ class RegisterController extends Controller
             'location' => 'required',
         ]);
         $input = $request->all();
-        dd($input);
-        exit();
+        // dd($input);
+        // exit();
 
         $pre = DB :: table('registratie')->insertGetid([
             'firstname' =>$input['firstname'],

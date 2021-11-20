@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('vaccinatieQR','App\Http\Controllers\ApiController@vaccinatie_QRvalidation')->name('vaccinatie_QRvalidation');
 Route::post('PCRQR','App\Http\Controllers\ApiController@PCR_QRvalidation')->name('PCR_QRvalidation');
+Route::post('qrscanner','App\Http\Controllers\ApiController@qrscanner')->name('qrscanner');
+
