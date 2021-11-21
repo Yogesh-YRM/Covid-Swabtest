@@ -29,23 +29,23 @@ $location = DB:: table('locations')->select('*')->get();
          <table class="table table-bordered">
          <tr>
     <th>Datum registratie</th>
-    <td>{{date("d-m-Y", strtotime($registratie->created_at))}}</td>
+    <td>{{date("d-m-Y", strtotime($registratie->dat_reg))}}</td>
   </tr>
          <tr>
     <th>Voornaam</th>
-    <td>{{$registratie->firstname}}</td>
+    <td>{{$registratie->voornaam}}</td>
   </tr>
   <tr>
     <th>Familienaam</th>
-    <td>{{$registratie->lastname}}</td>
+    <td>{{$registratie->achternaam}}</td>
   </tr>
   <tr>
     <th>Geboorte datum</th>
-    <td>{{$registratie->birthdate}}</td>
+    <td>{{$registratie->geboorte_datum}}</td>
   </tr>
   <tr>
     <th>ID-nummer</th>
-    <td>{{$registratie->id_number}}</td>
+    <td>{{$registratie->id_nummer}}</td>
   </tr>
   <tr>
     <th>Adres</th>
@@ -53,7 +53,7 @@ $location = DB:: table('locations')->select('*')->get();
   </tr>
   <tr>
     <th>Telefoon</th>
-    <td>{{$registratie->phonenumber}}</td>
+    <td>{{$registratie->mobiel}}</td>
   </tr>
   <tr>
     <th>E-mail</th>

@@ -46,8 +46,9 @@ class RegisterController extends Controller
      */
     public function show($pre)
     {
-        $registratie = DB :: table('registratie as r')->select('r.*','l.name as loc')
+        $registratie = DB :: table('registratie as r')->select('r.*','l.name as loc','u.*','r.created_at as dat_reg')
         ->leftjoin('locations as l','l.id','r.location')
+        ->leftjoin('users as u','u.id','r.user_id')
         ->where('r.id',$pre)
         ->get();
         return view('registratie.registerconfirm')->with('registratie',$registratie[0]);
@@ -101,23 +102,55 @@ class RegisterController extends Controller
             'location' => 'required',
         ]);
         $input = $request->all();
-        // dd($input);
-        // exit();
+        
 
-        $pre = DB :: table('registratie')->insertGetid([
-            'firstname' =>$input['firstname'],
-            'lastname' =>$input['lastname'],
-            'birthdate' =>$input['birthdate'],
-            'adress' =>$input['adress'],
-            'phonenumber' =>$input['phonenumber'],
-            'id_number' =>$input['id_number'],
-            'email' =>$input['email'],
-            'opmerking' =>$input['symptoms'],
-            'location'=>$input['location'],
-            'status'=>"preregistratie",
-            'created_at' =>date('Y-m-d H:i:s')
-        ]);
-    return redirect (route('registeren.show',[$pre]));
+        $users = DB :: table('users')->select('*')->get();
+       
+        foreach ($users as $u)
+
+
+        if($input['id_number'] == $u->id_nummer)
+        {
+
+            $users = DB :: table('users')->select('*')->where('id_nummer',$input['id_number'])->get();
+
+            $pre = DB :: table('registratie')->insertGetid([
+                'user_id' => $users[0]->id,
+                'opmerking' =>$input['symptoms'],
+                'location'=>$input['location'],
+                'status'=>"preregistratie",
+                'created_at' =>date('Y-m-d H:i:s')
+            ]);
+
+            return redirect (route('registeren.show',[$pre]));       
+
+        }
+        else
+        {
+            $user  = DB :: table('users')->insertGetId([
+                'voornaam' =>$input['firstname'],
+                'achternaam' =>$input['lastname'],
+                'geboorte_datum' =>$input['birthdate'],
+                'adress' =>$input['adress'],
+                'mobiel' =>$input['phonenumber'],
+                'id_nummer' =>$input['id_number'],
+                'email' =>$input['email'],
+                'created_at' =>date('Y-m-d H:i:s')
+            ]);
+    
+
+            $pre = DB :: table('registratie')->insertGetid([
+                'user_id' => $user,
+                'opmerking' =>$input['symptoms'],
+                'location'=>$input['location'],
+                'status'=>"preregistratie",
+                'created_at' =>date('Y-m-d H:i:s')
+            ]);
+            return redirect (route('registeren.show',[$pre]));       
+            
+        }
+        return redirect (route('registeren.show',[$pre]));       
+    
     }
 
     public function result_pdf($id)
