@@ -139,11 +139,11 @@ function yesnoCheckcreate(that) {
        });
     });
   </script>
+
   <script>
        $(document).ready(function() {
                 $('#searchid').on('keyup', function() {
                     var id = $("#searchid").val();
-                    console.log(id);
                     $.ajax('{{URL::to('/')}}/authorize/adminregistratie/create/finduser?q='+id, // request url
                         {
                             success: function(data, status, xhr) { // success callback function
@@ -158,13 +158,13 @@ function yesnoCheckcreate(that) {
                                 var adres = '';
                                 var telefoon = '';
                                 $.each(data, function(index, val){
-                                 voornaam = val.firstname;
-                                 familienaam = val.lastname;
-                                 geb_datum = val.birthdate;
-                                 adres = val.address;
-                                 telefoon = val.phonenumber;
+                                 voornaam = val.voornaam;
+                                 familienaam = val.achternaam;
+                                 geb_datum = val.geboorte_datum;
+                                 adres = val.adress;
+                                 telefoon = val.mobiel;
                                 });
-                                console.log(voornaam);
+                                // console.log(voornaam);
 
                                 $("#voornaam").val(voornaam);
                                 $("#familienaam").val(familienaam);
@@ -178,6 +178,15 @@ function yesnoCheckcreate(that) {
 
             });
         });
+
+        $(function() {
+        $('#searchid').on('keypress', function(e) {
+            if (e.which == 32){
+                console.log('Space Detected');
+                return false;
+            }
+        });
+});
       </script>
 </body>
 

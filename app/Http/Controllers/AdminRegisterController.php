@@ -19,7 +19,9 @@ class AdminRegisterController extends Controller
      */
     public function index()
     {
-        $registraties = DB::table('registratie')->select('*')->where('status', '!=', "afgehandeld")->get();
+        $registraties = DB::table('registratie')->select('registratie.*','u.*','registratie.id as reg_id','registratie.created_at as reg_date')->where('status', '!=', "afgehandeld")
+        ->leftjoin('users as u','u.id','registratie.user_id')->get();
+
         return view('adminregistratie.index')->with('registraties', $registraties);
     }
 
@@ -44,26 +46,62 @@ class AdminRegisterController extends Controller
     {
         $input = $request->all();
 
-        $bp = array($input['bovendruk'], $input['onderdruk']);
-        $bpjson = json_encode($bp);
-        $vax = array($input['vaxstatus'], $input['vaxdosis']);
-        $vaxjson = json_encode($vax);
-
-        $reg = DB::table('registratie')->insertgetId([
-            'firstname' => $input['firstname'],
-            'lastname' => $input['lastname'],
-            'birthdate' => $input['birthdate'],
-            'adress' => $input['adress'],
-            'phonenumber' => $input['phonenumber'],
-            'id_number' => $input['id_number'],
-            'email' => $input['email'],
-            'opmerking' => $input['symptoms'],
-            'status' => "geregistreerd",
-            'saturation' => $input['saturatie'],
-            'bp' => $bpjson,
-            'vax' => $vaxjson,
-            'created_at' => date('Y-m-d H:i:s')
-        ]);
+        $users = DB :: table('users')->select('*')->get();
+       
+        $array = json_decode($users);
+        $match_string =$input['id_number'];
+        $found = false;
+        foreach ($array as $data) {
+            if ($found) {
+                
+                        } 
+                        else if ($data->id_nummer === $match_string) {
+                        $found = true;
+                        $users = DB :: table('users')->select('*')->where('id_nummer',$input['id_number'])->get();
+                        $bp = array($input['bovendruk'], $input['onderdruk']);
+                        $bpjson = json_encode($bp);
+                        $vax = array($input['vaxstatus'], $input['vaxdosis']);
+                        $vaxjson = json_encode($vax);
+                        $reg = DB::table('registratie')->insertgetId([
+                            'user_id' => $users[0]->id,
+                            'opmerking' => $input['symptoms'],
+                            'status' => "geregistreerd",
+                            'saturation' => $input['saturatie'],
+                            'bp' => $bpjson,
+                            'vax' => $vaxjson,
+                            'created_at' => date('Y-m-d H:i:s')
+                        ]);
+                        return redirect(route('adminregistratie.index'));
+                            }
+                        }
+            if (!$found) {
+                $bp = array($input['bovendruk'], $input['onderdruk']);
+                $bpjson = json_encode($bp);
+                $vax = array($input['vaxstatus'], $input['vaxdosis']);
+                $vaxjson = json_encode($vax);
+                $user  = DB :: table('users')->insertGetId([
+                                    'voornaam' =>$input['firstname'],
+                                    'achternaam' =>$input['lastname'],
+                                    'geboorte_datum' =>$input['birthdate'],
+                                    'adress' =>$input['adress'],
+                                    'mobiel' =>$input['phonenumber'],
+                                    'id_nummer' =>$input['id_number'],
+                                    'email' =>$input['email'],
+                                    'created_at' =>date('Y-m-d H:i:s')
+                                ]);
+                        
+                    
+                                $reg = DB::table('registratie')->insertgetId([
+                                    'user_id' => $user,
+                                    'opmerking' => $input['symptoms'],
+                                    'status' => "geregistreerd",
+                                    'saturation' => $input['saturatie'],
+                                    'bp' => $bpjson,
+                                    'vax' => $vaxjson,
+                                    'created_at' => date('Y-m-d H:i:s')
+                                ]);
+                                return redirect(route('adminregistratie.index'));
+            }
 
         return redirect(route('adminregistratie.index'));
     }
@@ -239,7 +277,7 @@ class AdminRegisterController extends Controller
     {
         $input = $request->all();
 
-        $registraties = DB::table('registratie')->select('*')->where('id_number', 'like', '%' . $input['q'] . '%')->get();
-        return json_encode($registraties);
+        $users = DB::table('users')->select('*')->where('id_nummer', 'like', '%' . $input['q'] . '%')->get();
+        return json_encode($users);
     }
 }

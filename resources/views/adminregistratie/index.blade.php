@@ -30,16 +30,16 @@
          </tr>
       @foreach($registraties as $reg)
          <tr>
-             <td>{{date("d-m-Y", strtotime($reg->created_at))}}</td>
-             <td>{{$reg->id_number}}</td>
-             <td>{{$reg->firstname}} {{$reg->lastname}}</td>
-             <td>{{$reg->phonenumber}}</td>
+             <td>{{date("d-m-Y", strtotime($reg->reg_date))}}</td>
+             <td>{{$reg->id_nummer}}</td>
+             <td>{{$reg->voornaam}} {{$reg->achternaam}}</td>
+             <td>{{$reg->mobiel}}</td>
              <td>{{$reg->status}}</td>
              <td>
                  @if($reg->status == "preregistratie")
-                        <a class="btn btn-primary" href= "{{route('adminregistratie.edit',[$reg->id])}}">Registreer</a>
+                        <a class="btn btn-primary" href= "{{route('adminregistratie.edit',[$reg->reg_id])}}">Registreer</a>
                         @elseif($reg->status == "geregistreerd")
-                        <a class="btn btn-success" href= "{{route('adminregistratie.show',[$reg->id])}}">Bezichtigen</a>
+                        <a class="btn btn-success" href= "{{route('adminregistratie.show',[$reg->reg_id])}}">Bezichtigen</a>
                         @endif
              </td>
              <td>
@@ -47,8 +47,8 @@
                                 Resultaat
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{route('result',[$reg->id,'negatief'])}}" onclick="return confirm('Resultaat negatief boeken');">Negatief</a>
-                                <a class="dropdown-item" href="{{route('result',[$reg->id,'positief'])}}" onclick="return confirm('Resultaat negatief boeken');">Positief</a>
+                                <a class="dropdown-item" href="{{route('result',[$reg->reg_id,'negatief'])}}" onclick="return confirm('Resultaat negatief boeken');">Negatief</a>
+                                <a class="dropdown-item" href="{{route('result',[$reg->reg_id,'positief'])}}" onclick="return confirm('Resultaat negatief boeken');">Positief</a>
                             </div>
              </td>
 

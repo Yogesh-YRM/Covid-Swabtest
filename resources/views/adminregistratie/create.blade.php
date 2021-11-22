@@ -24,19 +24,19 @@
 <form action="{{ route('adminregistratie.store') }}" method="POST">
     @csrf
     <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">ID-Nummer<r style="color:red;">*</r></label>
+         <div class="col-sm-4">
+          <input type="text" name="id_number" class="form-control" pattern=".{9,}" maxlength ="9"  id="searchid" placeholder="" onkeyup="this.value = this.value.toUpperCase();">
+         </div>
        <label for="" class="col-sm-2 col-form-label">Voornaam<r style="color:red;">*</r></label>
          <div class="col-sm-4">
             <input type="text" name ="firstname" id="voornaam" class="form-control" id="" placeholder="">
          </div>
-         <label for="" class="col-sm-2 col-form-label">Familienaam<r style="color:red;">*</r></label>
-         <div class="col-sm-4">
-            <input type="text" name="lastname" id="familienaam" class="form-control" id="" placeholder="">
-         </div>
     </div>
     <div class="form-group row">
-         <label for="" class="col-sm-2 col-form-label">ID-Nummer<r style="color:red;">*</r></label>
+    <label for="" class="col-sm-2 col-form-label">Familienaam<r style="color:red;">*</r></label>
          <div class="col-sm-4">
-           <input type="text" name="id_number" id="searchid" class="form-control" id="" placeholder="">
+            <input type="text" name="lastname" id="familienaam" class="form-control" id="" placeholder="">
          </div>
          <label for="" class="col-sm-2 col-form-label">Geboorte datum<r style="color:red;">*</r></label>
          <div class="col-sm-4">

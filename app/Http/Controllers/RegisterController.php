@@ -98,57 +98,58 @@ class RegisterController extends Controller
             'phonenumber' => 'required',
             'birthdate' => 'required',
             'id_number' => 'required',
-            'email' => 'required',
             'location' => 'required',
         ]);
         $input = $request->all();
+
         
 
         $users = DB :: table('users')->select('*')->get();
        
-        foreach ($users as $u)
+            $array = json_decode($users);
+            $match_string =$input['id_number'];
+            $found = false;
+            foreach ($array as $data) {
+                if ($found) {
+                    
+                            } 
+                            else if ($data->id_nummer === $match_string) {
+                            $found = true;
+                            $users = DB :: table('users')->select('*')->where('id_nummer',$input['id_number'])->get();
+                            $pre = DB :: table('registratie')->insertGetid([
+                                'user_id' => $users[0]->id,
+                                'opmerking' =>$input['symptoms'],
+                                'location'=>$input['location'],
+                                'status'=>"preregistratie",
+                                'created_at' =>date('Y-m-d H:i:s')
+                            ]);
+                                return redirect (route('registeren.show',[$pre])); 
+                                }
+                            }
+                if (!$found) {
 
+                    $user  = DB :: table('users')->insertGetId([
+                                        'voornaam' =>$input['firstname'],
+                                        'achternaam' =>$input['lastname'],
+                                        'geboorte_datum' =>$input['birthdate'],
+                                        'adress' =>$input['adress'],
+                                        'mobiel' =>$input['phonenumber'],
+                                        'id_nummer' =>$input['id_number'],
+                                        'email' =>$input['email'],
+                                        'created_at' =>date('Y-m-d H:i:s')
+                                    ]);
+                            
+                        
+                                    $pre = DB :: table('registratie')->insertGetid([
+                                        'user_id' => $user,
+                                        'opmerking' =>$input['symptoms'],
+                                        'location'=>$input['location'],
+                                        'status'=>"preregistratie",
+                                        'created_at' =>date('Y-m-d H:i:s')
+                                    ]);
+                                    return redirect (route('registeren.show',[$pre])); 
+                }
 
-        if($input['id_number'] == $u->id_nummer)
-        {
-
-            $users = DB :: table('users')->select('*')->where('id_nummer',$input['id_number'])->get();
-
-            $pre = DB :: table('registratie')->insertGetid([
-                'user_id' => $users[0]->id,
-                'opmerking' =>$input['symptoms'],
-                'location'=>$input['location'],
-                'status'=>"preregistratie",
-                'created_at' =>date('Y-m-d H:i:s')
-            ]);
-
-            return redirect (route('registeren.show',[$pre]));       
-
-        }
-        else
-        {
-            $user  = DB :: table('users')->insertGetId([
-                'voornaam' =>$input['firstname'],
-                'achternaam' =>$input['lastname'],
-                'geboorte_datum' =>$input['birthdate'],
-                'adress' =>$input['adress'],
-                'mobiel' =>$input['phonenumber'],
-                'id_nummer' =>$input['id_number'],
-                'email' =>$input['email'],
-                'created_at' =>date('Y-m-d H:i:s')
-            ]);
-    
-
-            $pre = DB :: table('registratie')->insertGetid([
-                'user_id' => $user,
-                'opmerking' =>$input['symptoms'],
-                'location'=>$input['location'],
-                'status'=>"preregistratie",
-                'created_at' =>date('Y-m-d H:i:s')
-            ]);
-            return redirect (route('registeren.show',[$pre]));       
-            
-        }
         return redirect (route('registeren.show',[$pre]));       
     
     }

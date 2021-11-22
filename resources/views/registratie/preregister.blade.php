@@ -50,7 +50,7 @@ $location = DB::table('locations')->select('*')->get();
       <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label">ID-Nummer<r style="color:red;">*</r></label>
         <div class="col-sm-10">
-          <input type="text" name="id_number" class="form-control" id="" placeholder="">
+          <input type="text" name="id_number" class="form-control" pattern=".{9,}" maxlength ="9"  id="input1" placeholder="" onkeyup="this.value = this.value.toUpperCase();">
         </div>
       </div>
       <div class="form-group row">
@@ -132,6 +132,15 @@ $location = DB::table('locations')->select('*')->get();
       $('#phone').val("+" + countryCode + $('#phone').val());
     });
   });
+
+  $(function() {
+        $('#input1').on('keypress', function(e) {
+            if (e.which == 32){
+                console.log('Space Detected');
+                return false;
+            }
+        });
+});
 </script>
 
 </div>
