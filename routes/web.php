@@ -49,7 +49,7 @@ Route::group([
             return File::get(public_path() . '/custom/vaccinatie-eqrscanner.html');
         })->middleware('can:role,"admin","editor","medical","scanner"');
         Route::get('/pcr-qrscanner', function () {
-            return File::get(public_path() . '/custom/pcr_qrScanner.html');
+            return File::get(public_path() . '/custom/QrScanner2.html');
         })->middleware('can:role,"admin","editor","medical","scanner"');
     });
 
