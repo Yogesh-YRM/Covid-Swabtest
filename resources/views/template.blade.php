@@ -55,13 +55,8 @@
                         <a href="{{route('resultaatoverzicht')}}" class="nav-link">Resultaten</a>
                     </li>
                     @endcan
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link" data-toggle="dropdown">QR Scanner</a>
-                        <div class="dropdown-menu dropdown-menu-right">
-
-                            <a href="/authorize/vaccinatie-eqrscanner" class="dropdown-item">Vaccinatie QR Scanner</a>
-                            <a href="/authorize/pcr-qrscanner" class="dropdown-item">PCR QR Scanner</a>
-                        </div>
+                    <li class="nav-item">
+                        <a href="/authorize/QR-scanner" class="nav-link" >QR Scanner</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" data-toggle="dropdown">{{ Auth::user()->achternaam }}</a>

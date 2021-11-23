@@ -48,7 +48,7 @@ Route::group([
         Route::get('/vaccinatie-eqrscanner', function () {
             return File::get(public_path() . '/custom/vaccinatie-eqrscanner.html');
         })->middleware('can:role,"admin","editor","medical","scanner"');
-        Route::get('/pcr-qrscanner', function () {
+        Route::get('/QR-scanner', function () {
             return File::get(public_path() . '/custom/QrScanner2.html');
         })->middleware('can:role,"admin","editor","medical","scanner"');
     });
