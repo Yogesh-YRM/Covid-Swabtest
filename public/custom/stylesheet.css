@@ -1,0 +1,41 @@
+.table-bordered tr:nth-of-type(2n){
+    background-color: #dff0d8;
+}
+
+.table-bordered tr:nth-of-type(2n-1){
+    background-color: #fff;
+}
+
+
+.table-bordered tr:first-of-type  {
+    background-color: #4FC3A1;
+    color: #ffffff;
+}
+
+.table-bordered tr td{
+    border: none;
+}
+
+.table-bordered tr th{
+    border: none;
+}
+
+.text-center a.btn{
+    color: white;
+    background-color: #324960;
+    border-color: #324960;
+}
+
+.col-lg-12 .text-center{
+    padding-bottom: 8px;
+}
+
+.user-edit{
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: #212529;
+}
+
+.user-edit i{
+    color: #212529;
+}

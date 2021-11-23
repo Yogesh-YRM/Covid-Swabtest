@@ -39,10 +39,10 @@
              <td>{{ $value->role }}</td>
              <td>
                   <form action="{{ route('authorizeUsers.destroy', $value->id)}}" method="POST">
-                        <a class="btn btn-primary" href="{{ route('authorizeUsers.edit',$value->id) }}" >Bijwerken</a>
+                        <a class="btn btn-primary user-edit" href="{{ route('authorizeUsers.edit',$value->id) }}" ><i class="bi bi-pencil-square"></i></a>
                      @csrf
                      @method('DELETE')
-                     <button type="submit" class="btn btn-danger">Verwijderen</button>
+                     <button type="submit" class="btn btn-danger user-trash"><i class="bi bi-trash"></i></button>
                   </form>
              </td>
 
