@@ -20,29 +20,29 @@
        </div>
    @endif
 
-       <form action="{{ route('vaccinatie.update',$data->id) }}" method="POST">
+       <form action="{{ route('vaccinatie.update',$data->vax_id) }}" method="POST">
           @csrf
           @method('PUT')
           @csrf
              <div class="form-group row">
                 <label for="inputName" class="col-sm-2 col-form-label">Voornaam</label>
                   <div class="col-sm-4">
-                     <input type="text" name="first_name" class="form-control" value="{{ $data->first_name }}"/>
+                     <input type="text" name="first_name" class="form-control" value="{{ $data->voornaam }}"/>
                   </div>
                  <label for="inputName" class="col-sm-2 col-form-label">Achternaam</label>
                   <div class="col-sm-4">
-                     <input type="text" name="last_name" class="form-control" value="{{ $data->last_name }}">
+                     <input type="text" name="last_name" class="form-control" value="{{ $data->achternaam }}">
                   </div>
              </div>
 
                <div class="form-group row">
                    <label for="inputBirthDate" class="col-sm-2 col-form-label">Geboorte datum</label>
                    <div class="col-sm-4">
-                     <input type="date" name="birth_date" class="form-control" value="{{ $data->birth_date }}">
+                     <input type="date" name="birth_date" class="form-control" value="{{ $data->geboorte_datum }}">
                    </div>
                    <label for="inputId_nummer" class="col-sm-2 col-form-label">ID-Nummer</label>
                    <div class="col-sm-4">
-                      <input type="text" name="id_number" class="form-control" value="{{ $data->id_number }}">
+                      <input type="text" name="id_number" class="form-control" value="{{ $data->id_nummer }}">
                    </div>
                </div>
 
@@ -51,7 +51,7 @@
                         <div class="col-sm-10">
                             <select class="custom-select mr-sm-2" name="manufracturer" id="inlineFormCustomSelect" >
                                 <option selected>Choose...</option>
-                                <option value="AstraZeneca">AstraZeneca</option>
+                                <option value="AstraZeneca" <?php if(isset($data->manufracturer) == "AstraZeneca") { echo ' selected="selected"'; } ?>>AstraZeneca</option>
                                 <option value="Moderna">Moderna</option>
                                 <option value="Pfizer">Pfizer</option>
                                 <option value="Sinopharm">Sinopharm</option>
@@ -75,7 +75,7 @@
                     </div>
 
                     <div></div>
-
+@if($data->date1 != null)
                      <div class="form-row mt-4">
                          <div class="form-group col-md-4">
                              <label for="inputLot-Number2">Lot Nummer 2</label>
@@ -90,6 +90,8 @@
                               <input type="text" name="vaccinator2" class="form-control" value="{{ $data->vaccinator2 }}">
                          </div>
                      </div>
+@endif
+@if($data->date2 != null)
 
                      <div class="form-row mt-4">
                          <div class="form-group col-md-4">
@@ -105,8 +107,8 @@
                               <input type="text" name="vaccinator3" class="form-control" value="{{ $data->vaccinator3 }}">
                          </div>
                      </div>
-
-                     <div class="form-group row mt-3">
+@endif
+                     <!-- <div class="form-group row mt-3">
                           <label for="inputStatus" class="col-sm-2 col-form-label">Status</label>
 
                           <div class="col-sm-10">
@@ -118,7 +120,7 @@
                               </select>
                           </div>
 
-                     </div>
+                     </div> -->
 
                      <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <button type="submit" class="btn btn-primary">Opslaan</button>

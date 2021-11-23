@@ -28,19 +28,19 @@
               <div class="card">
                 <div class="card-body">
                     <label for="inputName" class="">Voornaam</label>
-                    <input type="text" name="first_name" class="form-control" disabled value="{{ $data->first_name }}"/>
+                    <input type="text" name="first_name" class="form-control" disabled value="{{ $data->voornaam }}"/>
 
                     <label for="inputName" >Achternaam</label>
-                    <input type="text" name="last_name" class="form-control" disabled value="{{ $data->last_name }}">
+                    <input type="text" name="last_name" class="form-control" disabled value="{{ $data->achternaam }}">
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                           <label for="inputBirthDate">Geboorte datum</label>
-                          <input type="date" class="form-control" id="inputBirthDate" disabled value="{{ $data->birth_date }}">
+                          <input type="date" class="form-control" id="inputBirthDate" disabled value="{{ $data->geboorte_datum }}">
                         </div>
                         <div class="form-group col-md-6">
                           <label for="inputId_nummer">ID-Nummer</label>
-                          <input type="text" class="form-control" id="inputId_nummer" disabled value="{{ $data->id_number }}">
+                          <input type="text" class="form-control" id="inputId_nummer" disabled value="{{ $data->id_nummer }}">
                         </div>
                       </div>
 
@@ -69,13 +69,13 @@
                           <label for="inputManufracturer">Fabrikant</label>
                           <input type="text" class="form-control" id="inputManufracturer" disabled value="{{ $data->manufracturer }}">
                         </div>
-                        <div class="form-group col-md-6">
+                        <!-- <div class="form-group col-md-6">
                           <label for="inputStatus">Status</label>
                           <input type="text" class="form-control" id="inputStatus" disabled value="{{ $data->status }}">
-                        </div>
-                      </div>
+                        </div>-->
+                      </div> 
 
-                  <div class="form-row mt-4">
+                  <div class="form-row mt-12">
                       <div class="form-group col-md-4">
                         <label for="inputLot-Number1">Lot Nummer 1</label>
                         <input type="text" name="lot_number1" class="form-control" disabled value="{{ $data->lot_number1 }}">
@@ -91,8 +91,8 @@
                     </div>
 
                     <div></div>
-
-                     <div class="form-row mt-4">
+@if($data->date2 != null)
+                     <div class="form-row mt-12">
                          <div class="form-group col-md-4">
                              <label for="inputLot-Number2">Lot Nummer 2</label>
                              <input type="text" name="lot_number2" class="form-control" disabled value="{{ $data->lot_number2 }}">
@@ -106,8 +106,9 @@
                               <input type="text" name="vaccinator2" class="form-control" disabled value="{{ $data->vaccinator2 }}">
                          </div>
                      </div>
-
-                     <div class="form-row mt-4">
+@endif
+@if($data->date3 != null)
+                     <div class="form-row mt-12">
                          <div class="form-group col-md-4">
                               <label for="inputLot-Number3">Lot Nummer 3</label>
                               <input type="text" name="lot_number3" class="form-control" disabled value="{{ $data->lot_number3 }}">
@@ -121,6 +122,7 @@
                               <input type="text" name="vaccinator3" class="form-control" disabled value="{{ $data->vaccinator3 }}">
                          </div>
                      </div>
+@endif
       </div>
     </div>
   </div>

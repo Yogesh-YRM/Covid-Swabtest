@@ -25,25 +25,27 @@
           {{--person form--}}
 
              <div class="form-group row">
+             <label for="inputId_nummer" class="col-sm-2 col-form-label">ID-Nummer</label>
+                   <div class="col-sm-4">
+                      <input type="text" name="id_number" class="form-control" id="vaxid" placeholder="ID-Nummer" pattern=".{9,}" maxlength ="9" onkeyup="this.value = this.value.toUpperCase();"> 
+                   </div>
                 <label for="inputName" class="col-sm-2 col-form-label">Voornaam</label>
                   <div class="col-sm-4">
                      <input type="text" name="first_name" class="form-control" id="inputVoornaam" placeholder="Voornaam">
                   </div>
-                 <label for="inputName" class="col-sm-2 col-form-label">Achternaam</label>
-                  <div class="col-sm-4">
-                     <input type="text" name="last_name" class="form-control" id="inputAchternaam" placeholder="Achternaam">
-                  </div>
+                 
              </div>
 
                <div class="form-group row">
+               <label for="inputName" class="col-sm-2 col-form-label">Achternaam</label>
+                  <div class="col-sm-4">
+                     <input type="text" name="last_name" class="form-control" id="inputAchternaam" placeholder="Achternaam">
+                  </div>
                    <label for="inputBirthDate" class="col-sm-2 col-form-label">Geboorte datum</label>
                    <div class="col-sm-4">
                      <input type="date" name="birth_date" class="form-control" id="inputBirthDate" placeholder="Geboorte datum">
                    </div>
-                   <label for="inputId_nummer" class="col-sm-2 col-form-label">ID-Nummer</label>
-                   <div class="col-sm-4">
-                      <input type="text" name="id_number" class="form-control" id="inputId_nummer" placeholder="ID-Nummer">
-                   </div>
+                  
                </div>
 
                <div class="form-group row">
@@ -76,7 +78,7 @@
 
                     <div></div>
 
-                     <div class="form-row mt-4">
+                     <!-- <div class="form-row mt-4">
                          <div class="form-group col-md-4">
                              <label for="inputLot-Number2">Lot Nummer 2</label>
                              <input type="text" name="lot_number2" class="form-control" id="inputLot-Number2" placeholder="Lot Nummer 2">
@@ -104,9 +106,9 @@
                               <label for="inputVaccinator3">Naam Vaccinator booster</label>
                               <input type="text" name="vaccinator3" class="form-control" id="inputVaccinator3" placeholder="Naam">
                          </div>
-                     </div>
+                     </div> -->
 
-                     <div class="form-group row mt-3">
+                     <!-- <div class="form-group row mt-3">
                            <label for="inputStatus" class="col-sm-2 col-form-label">Status</label>
 
                            <div class="col-sm-10">
@@ -118,7 +120,7 @@
                             </select>
                             </div>
 
-                     </div>
+                     </div> -->
 
              <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Opslaan</button>

@@ -188,6 +188,54 @@ function yesnoCheckcreate(that) {
         });
 });
       </script>
+      <script>
+       $(document).ready(function() {
+                $('#vaxid').on('keyup', function() {
+                    var id = $("#vaxid").val();
+                    $.ajax('{{URL::to('/')}}/authorize/adminregistratie/create/finduser?q='+id, // request url
+                        {
+                            success: function(data, status, xhr) { // success callback function
+                                
+                                data = JSON.parse(data);
+                                // console.log(data);
+                                
+
+                                var voornaam = '';
+                                var familienaam = '';
+                                var geb_datum = '';
+                                var adres = '';
+                                var telefoon = '';
+                                $.each(data, function(index, val){
+                                 voornaam = val.voornaam;
+                                 familienaam = val.achternaam;
+                                 geb_datum = val.geboorte_datum;
+                                 adres = val.adress;
+                                 telefoon = val.mobiel;
+                                });
+                                // console.log(voornaam);
+
+                                $("#inputVoornaam").val(voornaam);
+                                $("#inputAchternaam").val(familienaam);
+                                $("#inputBirthDate").val(geb_datum);
+                                $("#adres").val(adres);
+                                $("#telefoon").val(telefoon);
+                               
+                            }
+
+                });
+
+            });
+        });
+
+        $(function() {
+        $('#vaxid').on('keypress', function(e) {
+            if (e.which == 32){
+                console.log('Space Detected');
+                return false;
+            }
+        });
+});
+      </script>
 </body>
 
 </html>
