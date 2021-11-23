@@ -114,7 +114,8 @@ class AdminRegisterController extends Controller
      */
     public function show($id)
     {
-        $reg = DB::table('registratie')->select('*')->where('id', $id)->get();
+        $reg = DB::table('registratie')->select('registratie.*','u.*','registratie.id as reg_id','registratie.created_at as reg_date')->where('status', '!=', "afgehandeld")
+        ->leftjoin('users as u','u.id','registratie.user_id')->where('registratie.id',$id)->get();
         return view('adminregistratie.show')->with('reg', $reg[0]);
     }
 
@@ -126,7 +127,8 @@ class AdminRegisterController extends Controller
      */
     public function edit($id)
     {
-        $prereg = DB::table('registratie')->select('*')->where('id', $id)->get();
+        $prereg = DB::table('registratie')->select('registratie.*','u.*','registratie.id as reg_id','registratie.created_at as reg_date')->where('status', '!=', "afgehandeld")
+        ->leftjoin('users as u','u.id','registratie.user_id')->where('registratie.id',$id)->get();
         return view('adminregistratie.edit')->with('prereg', $prereg[0]);
     }
 
@@ -193,8 +195,9 @@ class AdminRegisterController extends Controller
             ->png();
 
 
-        $smsresult = DB::table('registratie as r')->select('r.*', 'res.*', 'res.created_at as today')
+        $smsresult = DB::table('registratie as r')->select('r.*', 'res.*', 'res.created_at as today','u.*')
             ->leftjoin('result as res', 'r.id', 'res.registration_id')
+            ->leftjoin('users as u','u.id','r.user_id')
             ->where('res.id', $result)->get();
         ################################ LIVE KEYS #####################################
 
@@ -206,7 +209,7 @@ class AdminRegisterController extends Controller
 
         ################################ TEST KEYS #####################################
         $account_sid = 'AC5a9222e8258ab965b073b8df8a9211c7';
-        $auth_token = 'dssbfbfbd';
+        $auth_token = '386aba263b1be6996ecf641081f50c9e';
         $twilio_number = '+18143998410';
         $receiver = '+5978920264';
         ################################################################################
@@ -218,7 +221,7 @@ class AdminRegisterController extends Controller
             $receiver,
             array(
                 'from' => $twilio_number,
-                'body' => 'Beste ' . $smsresult[0]->lastname . ', U bent ' . $smsresult[0]->result . ' getest. Het bewijs vindt u op de volgende link team13.app.sr/result_pdf/' . $smsresult[0]->id_number
+                'body' => 'Beste ' . $smsresult[0]->achternaam . ', U bent ' . $smsresult[0]->result . ' getest. Het bewijs vindt u op de volgende link team13.app.sr/result_pdf/' . $smsresult[0]->id_nummer
 
             )
         );
@@ -230,8 +233,9 @@ class AdminRegisterController extends Controller
     {
         $input = $request->all();
 
-        $resultaten = DB::table('result as res')->select('r.*', 'res.*', 'res.created_at as today')
-            ->leftjoin('registratie as r', 'r.id', 'res.registration_id');
+        $resultaten = DB::table('result as res')->select('r.*', 'res.*','u.*', 'res.created_at as today','res.id as reg_id')
+            ->leftjoin('registratie as r', 'r.id', 'res.registration_id')
+            ->leftjoin('users as u','u.id','r.user_id');
 
 
         if (isset($input['resultfilter'])) {

@@ -57,13 +57,13 @@
          </tr>
       @foreach($resultaten as $res)
          <tr>
-             <td>{{date("d-m-Y", strtotime($res->created_at))}}</td>
-             <td>{{$res->id_number}}</td>
-             <td>{{$res->firstname}} {{$res->lastname}}</td>
-             <td>{{$res->phonenumber}}</td>
+             <td>{{date("d-m-Y", strtotime($res->today))}}</td>
+             <td>{{$res->id_nummer}}</td>
+             <td>{{$res->voornaam}} {{$res->achternaam}}</td>
+             <td>{{$res->mobiel}}</td>
              <td><c @if ($res->result =="positief")style = "color:red;" @elseif ($res->result == "negatief") style = "color:green;" @endif>{{$res->result}}</c></td>
              <td>
-             <a class="btn btn-success" href= "{{route('adminregistratie.show',[$res->id])}}"><i class="fas fa-eye"></i>Bezichtigen</a>
+             <a class="btn btn-success" href= "{{route('adminregistratie.show',[$res->reg_id])}}"><i class="fas fa-eye"></i>Bezichtigen</a>
              </td>
          </tr>
      @endforeach

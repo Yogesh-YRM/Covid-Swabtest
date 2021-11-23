@@ -18,21 +18,21 @@ $vax = json_decode($reg->vax);
 <table class="table table-bordered">
          <tr>
              <th>ID-nummer</th>
-             <td>{{$reg->id_number}}</td>
+             <td>{{$reg->id_nummer}}</td>
              <th>Registratie datum</th>
-             <td>{{date("d-m-Y", strtotime($reg->created_at))}}</td>
+             <td>{{date("d-m-Y", strtotime($reg->reg_date))}}</td>
         </tr>
         <tr>
              <th>Naam</th>
-             <td>{{$reg->firstname}} {{$reg->lastname}}</td>
+             <td>{{$reg->voornaam}} {{$reg->achternaam}}</td>
              <th>Adres</th>
              <td>{{$reg->adress}}</td>
         </tr>
         <tr>
              <th>Geboorte datum</th>
-             <td>{{$reg->birthdate}}</td>
+             <td>{{$reg->geboorte_datum}}</td>
              <th >Telefoon</th>
-             <td>{{$reg->phonenumber}}</td>
+             <td>{{$reg->mobiel}}</td>
         </tr>
         <tr>
              <th>Saturatie</th>

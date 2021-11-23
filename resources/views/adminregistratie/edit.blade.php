@@ -12,25 +12,25 @@
 <table class="table table-bordered">
          <tr>
              <th>ID-nummer</th>
-             <td>{{$prereg->id_number}}</td>
+             <td>{{$prereg->id_nummer}}</td>
              <th>Registratie datum</th>
-             <td>{{date("d-m-Y", strtotime($prereg->created_at))}}</td>
+             <td>{{date("d-m-Y", strtotime($prereg->reg_date))}}</td>
         </tr>
         <tr>
              <th>Naam</th>
-             <td>{{$prereg->firstname}} {{$prereg->lastname}}</td>
+             <td>{{$prereg->voornaam}} {{$prereg->achternaam}}</td>
              <th>Adres</th>
              <td>{{$prereg->adress}}</td>
         </tr>
         <tr>
              <th>Geboorte datum</th>
-             <td>{{$prereg->birthdate}}</td>
+             <td>{{$prereg->geboorte_datum}}</td>
              <th >Telefoon</th>
-             <td>{{$prereg->phonenumber}}</td>
+             <td>{{$prereg->mobiel}}</td>
         </tr>
      </table>
 
-<form action="{{ route('adminregistratie.update',[$prereg->id]) }}" method="POST">
+<form action="{{ route('adminregistratie.update',[$prereg->reg_id]) }}" method="POST">
     {{ csrf_field() }}
 {{ method_field('PUT') }}
     <div class="form-group row">
