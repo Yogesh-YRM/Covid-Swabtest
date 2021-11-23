@@ -18,9 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('voornaam');
             $table->string('achternaam');
             $table->string('geboorte_datum');
-            $table->string('adress');
+            $table->string('adress')->nullable();
             $table->string('id_nummer');
-            $table->string('mobiel');
+            $table->string('mobiel')->nullable();
             $table->string('email')->unique();
             $table->timestamps();
         });

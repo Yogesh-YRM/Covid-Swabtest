@@ -42,7 +42,7 @@
              <td>{{ $value->manufracturer }}</td>
              <td>{{ $value->status }}</td>
              <td>
-                  <form action="" method="POST">
+                  <form action="{{ route('vaccinatie.destroy', $value->vax_id)}}" method="POST">
                         <a class="btn btn-info" href="{{ route('vaccinatie.show',$value->vax_id) }}" ><i class="bi bi-eye"></i></a>
                         <a class="btn btn-warning" href="{{ route('vaccinatie.edit',$value->vax_id) }}" ><i class="bi bi-pencil-square"></i></a>
                      @csrf

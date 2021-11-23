@@ -49,21 +49,13 @@ class VaccinationController extends Controller
             'last_name' => 'required',
             'birth_date' => 'required',
             'id_number' => 'required',
-           
+
         ]);
 
         $input = $request->all();
 
         $file = 'generated_qrcodes/' . $input['id_number'] . '.png';
-        // $message = $input['first_name'] . ' ' . $input['last_name'] . ' ' . $input['id_number'] . ' is volledig gevaccineerd en heeft de ' . $input['manufracturer'] . ' Booster ook genomen';
 
-        // if ($input['status'] == '1e Dose') {
-        //     $message = $input['first_name'] . ' ' . $input['last_name'] . ' ' . $input['id_number'] . ' is met de eerste prik gevaccineerd';
-        // } elseif ($input['status'] == '2e Dose') {
-        //     $message = $input['first_name'] . ' ' . $input['last_name'] . ' ' . $input['id_number'] . ' is volledig gevaccineerd';
-        // } elseif ($input['status'] == 'Booster') {
-        //     $message = $input['first_name'] . ' ' . $input['last_name'] . ' ' . $input['id_number'] . ' is volledig gevaccineerd en heeft de ' . $input['manufracturer'] . ' Booster ook genomen';
-        // }
         //  DR encrypt qr code
         $encrypted = Crypt::encryptString('vax_'.$input['id_number']);
         $newQrcode = QRCode::text($encrypted)
@@ -75,18 +67,18 @@ class VaccinationController extends Controller
 
 
             $users = DB :: table('users')->select('*')->get();
-       
+
             $array = json_decode($users);
             $match_string =$input['id_number'];
             $found = false;
             foreach ($array as $data) {
                 if ($found) {
-                    
-                            } 
+
+                            }
                             else if ($data->id_nummer === $match_string) {
                             $found = true;
                             $users = DB :: table('users')->select('*')->where('id_nummer',$input['id_number'])->get();
-                           
+
                             $vax = DB::table('vaccinatie')->insertgetId([
                                 'user_id' => $users[0]->id,
                                 'manufracturer' => $input['manufracturer'],
@@ -94,13 +86,6 @@ class VaccinationController extends Controller
                                 'date1' => $input['date1'],
                                 'vaccinator1' => $input['vaccinator1'],
 
-                                // 'lot_number2' => $input['lot_number2'],
-                                // 'date2' => $input['date2'],
-                                // 'vaccinator2' => $input['vaccinator2'],
-
-                                // 'lot_number3' => $input['lot_number3'],
-                                // 'date3' => $input['date3'],
-                                // 'vaccinator3' => $input['vaccinator3'],
 
                                 // 'status' => $input['status'],
                                 'qr_code' => $file,
@@ -110,7 +95,7 @@ class VaccinationController extends Controller
                                 }
                             }
                 if (!$found) {
-                   
+
                     $user  = DB :: table('users')->insertGetId([
                                         'voornaam' =>$input['first_name'],
                                         'achternaam' =>$input['last_name'],
@@ -120,8 +105,8 @@ class VaccinationController extends Controller
                                         // 'email' =>$input['email'],
                                         'created_at' =>date('Y-m-d H:i:s')
                                     ]);
-                            
-                        
+
+
                                     $vax = DB::table('vaccinatie')->insertgetId([
                                         'user_id' => $user,
                                         'manufracturer' => $input['manufracturer'],
@@ -148,7 +133,7 @@ class VaccinationController extends Controller
 
 
 
-       
+
 
         return redirect()->route('vaccinatie.index')
             ->with('success', 'Gebruiker succesvol aangemaakt.');
@@ -220,7 +205,7 @@ class VaccinationController extends Controller
             ->png();
 
         $data = DB::table('vaccinatie')->where('id', $id)->update([
-           
+
             'lot_number1' => $request['lot_number1'],
             'date1' => $request['date1'],
             'vaccinator1' => $request['vaccinator1'],
@@ -249,6 +234,9 @@ class VaccinationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Vaccinatie::findOrFail($id);
+        $data->delete();
+
+        return redirect()->route('vaccinatie.index')->with('success', 'Gebruiker succesvol verwijderd.');
     }
 }

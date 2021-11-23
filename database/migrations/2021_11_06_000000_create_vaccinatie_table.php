@@ -16,9 +16,6 @@ class CreateVaccinatieTable extends Migration
         Schema::create('vaccinatie', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
-            // $table->string('last_name');
-            // $table->string('birth_date');
-            // $table->string('id_number');
 
             $table->string('manufracturer');
 
@@ -34,7 +31,7 @@ class CreateVaccinatieTable extends Migration
             $table->string('date3')->nullable();
             $table->string('vaccinator3')->nullable();
 
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->string('qr_code')->nullable();
             $table->timestamps();
         });
