@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-
+use Twilio\Rest\Client;
 use App\Models\Vaccinatie;
 use Flash;
 use QRCode;
@@ -44,6 +44,8 @@ class VaccinationController extends Controller
      */
     public function store(Request $request)
     {
+     require '../twilio/vendor/autoload.php';
+
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
@@ -91,6 +93,37 @@ class VaccinationController extends Controller
                                 'qr_code' => $file,
                                 'created_at' => date('Y-m-d H:i:s')
                             ]);
+
+$smsresult = DB::table('vaccinatie as r')->select('r.*','u.*')
+                                                   ->leftjoin('users as u','u.id','r.user_id')
+                                                   ->where('u.id_nummer', $input['id_number'])->get();
+                                               ################################ LIVE KEYS #####################################
+
+                                               // $account_sid = 'AC46041e1c4e91caee7c9949243e1a1e29';
+                                               // $auth_token = '7fdbfdb';
+                                               // $twilio_number = '+15703768094';
+                                               // $receiver =
+                                               ################################################################################
+
+                                               ################################ TEST KEYS #####################################
+                                               $account_sid = 'AC5a9222e8258ab965b073b8df8a9211c7';
+                                               $auth_token = '1234568';
+                                               $twilio_number = '+18143998410';
+                                               $receiver = '+5978920264';
+                                               ################################################################################
+
+
+                                               $client = new Client($account_sid, $auth_token);
+                                               $client->messages->create(
+                                                   // Where to send a text message (your cell phone?)
+                                                   $receiver,
+                                                   array(
+                                                       'from' => $twilio_number,
+                                                       'body' => 'Beste ' . $smsresult[0]->achternaam . ', U bent gevaccineerd. Het bewijs vindt u op de volgende link team13.app.sr/result_pdf/' . $smsresult[0]->id_nummer
+
+                                                   )
+                                               );
+
                             return redirect(route('vaccinatie.index'));
                                 }
                             }
@@ -100,9 +133,10 @@ class VaccinationController extends Controller
                                         'voornaam' =>$input['first_name'],
                                         'achternaam' =>$input['last_name'],
                                         'geboorte_datum' =>$input['birth_date'],
-                                        // 'mobiel' =>$input['phonenumber'],
+                                        'mobiel' =>$input['mobiel'],
                                         'id_nummer' =>$input['id_number'],
-                                        // 'email' =>$input['email'],
+                                        'adress' =>$input['adress'],
+                                        'email' =>$input['email'],
                                         'created_at' =>date('Y-m-d H:i:s')
                                     ]);
 
@@ -114,26 +148,43 @@ class VaccinationController extends Controller
                                 'date1' => $input['date1'],
                                 'vaccinator1' => $input['vaccinator1'],
 
-                                // 'lot_number2' => $input['lot_number2'],
-                                // 'date2' => $input['date2'],
-                                // 'vaccinator2' => $input['vaccinator2'],
 
-                                // 'lot_number3' => $input['lot_number3'],
-                                // 'date3' => $input['date3'],
-                                // 'vaccinator3' => $input['vaccinator3'],
-
-                                // 'status' => $input['status'],
                                 'qr_code' => $file,
                                 'created_at' => date('Y-m-d H:i:s')
                                     ]);
+
+$smsresult = DB::table('vaccinatie as r')->select('r.*','u.*')
+                                                   ->leftjoin('users as u','u.id','r.user_id')
+                                                   ->where('u.id_nummer', $input['id_number'])->get();
+                                               ################################ LIVE KEYS #####################################
+
+                                               // $account_sid = 'AC46041e1c4e91caee7c9949243e1a1e29';
+                                               // $auth_token = '7fdbfdb';
+                                               // $twilio_number = '+15703768094';
+                                               // $receiver =
+                                               ################################################################################
+
+                                               ################################ TEST KEYS #####################################
+                                               $account_sid = 'AC5a9222e8258ab965b073b8df8a9211c7';
+                                               $auth_token = '1234568';
+                                               $twilio_number = '+18143998410';
+                                               $receiver = '+5978920264';
+                                               ################################################################################
+
+
+                                               $client = new Client($account_sid, $auth_token);
+                                               $client->messages->create(
+                                                   // Where to send a text message (your cell phone?)
+                                                   $receiver,
+                                                   array(
+                                                       'from' => $twilio_number,
+                                                       'body' => 'Beste ' . $smsresult[0]->achternaam . ', U bent gevaccineerd. Het bewijs vindt u op de volgende link team13.app.sr/result_pdf/' . $smsresult[0]->id_nummer
+
+                                                   )
+                                               );
+
                                     return redirect(route('vaccinatie.index'));
                 }
-
-
-
-
-
-
 
         return redirect()->route('vaccinatie.index')
             ->with('success', 'Gebruiker succesvol aangemaakt.');
@@ -194,6 +245,8 @@ class VaccinationController extends Controller
      */
     public function update(Request $request, $id)
     {
+    require '../twilio/vendor/autoload.php';
+
         $file = 'generated_qrcodes/' . $request['id_number'] . '.png';
 
         //  DR encrypt qr code
@@ -222,6 +275,37 @@ class VaccinationController extends Controller
             'qr_code' => $file,
             'updated_at' => date('Y-m-d H:i:s')
         ]);
+
+         $smsresult = DB::table('vaccinatie as r')->select('r.*','u.*')
+                        ->leftjoin('users as u','u.id','r.user_id')
+                        ->where('r.id', $id)->get();
+                    ################################ LIVE KEYS #####################################
+
+                    // $account_sid = 'AC46041e1c4e91caee7c9949243e1a1e29';
+                    // $auth_token = '7fdbfdb';
+                    // $twilio_number = '+15703768094';
+                    // $receiver =
+                    ################################################################################
+
+                    ################################ TEST KEYS #####################################
+                    $account_sid = 'AC5a9222e8258ab965b073b8df8a9211c7';
+                    $auth_token = '1234568';
+                    $twilio_number = '+18143998410';
+                    $receiver = '+5978920264';
+                    ################################################################################
+
+
+                    $client = new Client($account_sid, $auth_token);
+                    $client->messages->create(
+                        // Where to send a text message (your cell phone?)
+                        $receiver,
+                        array(
+                            'from' => $twilio_number,
+                            'body' => 'Beste ' . $smsresult[0]->achternaam . ', U bent gevaccineerd. Het bewijs vindt u op de volgende link team13.app.sr/result_pdf/' . $smsresult[0]->id_nummer
+
+                        )
+                    );
+
         return redirect()->route('vaccinatie.index')
             ->with('success', 'Gebruiker gegevens zijn succesvol gewijzigd.');
     }

@@ -47,14 +47,14 @@ class AdminRegisterController extends Controller
         $input = $request->all();
 
         $users = DB :: table('users')->select('*')->get();
-       
+
         $array = json_decode($users);
         $match_string =$input['id_number'];
         $found = false;
         foreach ($array as $data) {
             if ($found) {
-                
-                        } 
+
+                        }
                         else if ($data->id_nummer === $match_string) {
                         $found = true;
                         $users = DB :: table('users')->select('*')->where('id_nummer',$input['id_number'])->get();
@@ -89,8 +89,8 @@ class AdminRegisterController extends Controller
                                     'email' =>$input['email'],
                                     'created_at' =>date('Y-m-d H:i:s')
                                 ]);
-                        
-                    
+
+
                                 $reg = DB::table('registratie')->insertgetId([
                                     'user_id' => $user,
                                     'opmerking' => $input['symptoms'],
@@ -114,8 +114,9 @@ class AdminRegisterController extends Controller
      */
     public function show($id)
     {
-        $reg = DB::table('registratie')->select('registratie.*','u.*','registratie.id as reg_id','registratie.created_at as reg_date')->where('status', '!=', "afgehandeld")
-        ->leftjoin('users as u','u.id','registratie.user_id')->where('registratie.id',$id)->get();
+        $reg = DB::table('registratie')->select('registratie.*','u.*','registratie.id as reg_id','registratie.created_at as reg_date','res.id as res_id','res.*')
+        ->leftjoin('users as u','u.id','registratie.user_id')
+        ->leftjoin('result as res','res.registration_id','registratie.id')->where('res.id',$id)->get();
         return view('adminregistratie.show')->with('reg', $reg[0]);
     }
 
@@ -209,9 +210,9 @@ class AdminRegisterController extends Controller
 
         ################################ TEST KEYS #####################################
         $account_sid = 'AC5a9222e8258ab965b073b8df8a9211c7';
-        $auth_token = '386aba263b1be6996ecf641081f50c9e';
+        $auth_token = '12345678';
         $twilio_number = '+18143998410';
-        $receiver = '+5978920264';
+        $receiver = '+5978968001';
         ################################################################################
 
 

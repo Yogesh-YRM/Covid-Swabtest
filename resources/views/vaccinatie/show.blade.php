@@ -65,7 +65,7 @@
               <div class="card-body">
 
                       <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-12">
                           <label for="inputManufracturer">Fabrikant</label>
                           <input type="text" class="form-control" id="inputManufracturer" disabled value="{{ $data->manufracturer }}">
                         </div>
@@ -73,7 +73,7 @@
                           <label for="inputStatus">Status</label>
                           <input type="text" class="form-control" id="inputStatus" disabled value="{{ $data->status }}">
                         </div>-->
-                      </div> 
+                      </div>
 
                   <div class="form-row mt-12">
                       <div class="form-group col-md-4">

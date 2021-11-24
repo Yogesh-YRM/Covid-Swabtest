@@ -44,7 +44,7 @@ $vax = json_decode($reg->vax);
              <th>Gevacccineerd</th>
              <td>{{$vax[0]}} @if($vax[1]!= null)Dosis {{$vax[1]}}@endif</td>
              <th >Resultaat</th>
-             <td>{{$reg->status}}</td>
+             <td class = "{{$reg->result}}-result">{{$reg->result}}</td>
         </tr>
      </table>
      <div class="col-xs-12 col-sm-12 col-md-12 text-center ">

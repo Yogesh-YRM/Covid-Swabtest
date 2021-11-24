@@ -12,13 +12,14 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css">
 
 </head>
 
 <body>
 
     {{-- navbar--}}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #324960!important;">
         <div class="container">
             <a class="navbar-brand" href="#">{{ config('app.name') }}</a>
             <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse">
@@ -86,6 +87,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/intlTelInput.min.js"></script>
 
     <script>
 
@@ -121,10 +123,16 @@ function yesnoCheckcreate(that) {
     </script>
     <script>
     // Vanilla Javascript
-    var input = document.querySelector("#phone");
+    var input = document.querySelector("#telefoon");
     window.intlTelInput(input,({
       // options here
+      initialCountry: "sr",
+    countryCode:"597",
     }));
+    function countryCode() {
+       $('#telefoon').val("+597" + $('#telefoon').val());
+        }
+        window.onload = countryCode;
 
     $(document).ready(function() {
         $('.iti__flag-container').click(function() {

@@ -19,19 +19,19 @@
     <h2 class="header" style = " text-align: center; font-size: 50px; font-family: Verdana, Geneva, Tahoma, sans-serif;border-bottom:20px solid green;
             text-align: center;";>PCR Resultaat</h2>
 </div>
-    <div id="" style = "text-align:center;"><img src="{{asset('generated_qrcodes'.'/'.$result->qr_code)}}"  alt="qrcode"></div>
+    <div id="" style = "text-align:center;"><img src="{{asset($result->qr_code)}}"  alt="qrcode"></div>
     
 
         <table class="table ">
             <tr>
                 <th>Naam:</th>
-                <td>{{$result->lastname}}</td>
+                <td>{{$result->voornaam}}</td>
                 <th>ID-nummer:</th>
-                <td>{{$result->id_number}}</td>
+                <td>{{$result->id_nummer}}</td>
             </tr>
             <tr>
                 <th>Datum Resultaat:</th>
-                <td>{{$result->created_at}}</td>
+                <td>{{$result->res_date}}</td>
                 <th>Resultaat</th>
                 <td>{{$result->result}}</td>
             </tr>

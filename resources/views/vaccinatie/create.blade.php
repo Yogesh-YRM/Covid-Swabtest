@@ -27,13 +27,13 @@
              <div class="form-group row">
              <label for="inputId_nummer" class="col-sm-2 col-form-label">ID-Nummer</label>
                    <div class="col-sm-4">
-                      <input type="text" name="id_number" class="form-control" id="vaxid" placeholder="ID-Nummer" pattern=".{9,}" maxlength ="9" onkeyup="this.value = this.value.toUpperCase();"> 
+                      <input type="text" name="id_number" class="form-control" id="vaxid" placeholder="ID-Nummer" pattern=".{9,}" maxlength ="9" onkeyup="this.value = this.value.toUpperCase();">
                    </div>
                 <label for="inputName" class="col-sm-2 col-form-label">Voornaam</label>
                   <div class="col-sm-4">
                      <input type="text" name="first_name" class="form-control" id="inputVoornaam" placeholder="Voornaam">
                   </div>
-                 
+
              </div>
 
                <div class="form-group row">
@@ -45,8 +45,28 @@
                    <div class="col-sm-4">
                      <input type="date" name="birth_date" class="form-control" id="inputBirthDate" placeholder="Geboorte datum">
                    </div>
-                  
+
                </div>
+
+               <div class="form-group row">
+                 <label for="inputMobiel" class="col-sm-2 col-form-label">Mobiel nummer</label>
+                   <div class="col-sm-4">
+                     <input type="text" name="mobiel" class="form-control" id="telefoon" size="100" placeholder="Nummer">
+                   </div>
+                 <label for="inputAdress" class="col-sm-2 col-form-label">Adress</label>
+                   <div class="col-sm-4">
+                      <input type="text" name="adress" class="form-control" id="inputAdress" placeholder="Adress">
+                   </div>
+
+               </div>
+
+               <div class="form-group row">
+                 <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
+                   <div class="col-sm-10">
+                     <input type="text" name="email" class="form-control" id="inputMail" placeholder="Email">
+                   </div>
+               </div>
+
 
                <div class="form-group row">
                      <label for="inputManufracture" class="col-sm-2 col-form-label">Manufracture</label>
@@ -66,9 +86,12 @@
                         <label for="inputLot-Number1">Lot Nummer 1</label>
                         <input type="text" name="lot_number1" class="form-control" id="inputLot-Number1" placeholder="Lot Nummer 1">
                       </div>
+                      <?php
+                      $today = date('Y-m-d H:i:s');
+                      ?>
                       <div class="form-group col-md-4">
                         <label for="inputDate1">Vaccinatie Datum dose 1</label>
-                        <input type="date" name="date1" class="form-control" id="inputDate1" placeholder="">
+                        <input type="date" name="date1" value="28-12-2000" class="form-control" id="inputDate1" placeholder="">
                       </div>
                       <div class="form-group col-md-4">
                          <label for="inputVaccinator1">Naam Vaccinator 1e dose</label>

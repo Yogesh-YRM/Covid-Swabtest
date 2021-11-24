@@ -156,9 +156,10 @@ class RegisterController extends Controller
 
     public function result_pdf($id)
     {
-        $result = DB::table('result as res')->select('res.*','r.*')
+        $result = DB::table('result as res')->select('res.*','r.*','u.*','res.created_at as res_date')
         ->leftjoin('registratie as r','r.id','res.registration_id')
-        ->where('r.id_number',$id)->get();
+        ->leftjoin('users as u','u.id','r.user_id')
+        ->where('u.id_nummer',$id)->get();
         
         return view('registratie.resultpdf')->with('result',$result[0]);
     }

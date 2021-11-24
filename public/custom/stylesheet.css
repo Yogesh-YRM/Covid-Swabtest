@@ -1,3 +1,5 @@
+
+
 .table-bordered tr:nth-of-type(2n){
     background-color: #dff0d8;
 }
@@ -38,4 +40,56 @@
 
 .user-edit i{
     color: #212529;
+}
+
+
+.resultaatbtn{
+    color: #fff;
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8 !important;
+}
+
+.neg{
+    
+    background-color: #dff0d8 !important;
+}
+
+.neg c{
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.pos c{
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.pos{
+    background-color: rgb(245, 212, 212) !important;
+}
+
+.nav-link{
+    color: #fff !important;
+    border-bottom: 2px solid #00000000;
+}
+
+.nav-link:hover{
+    color: #7ce6c6 !important;
+    border-bottom: 2px solid #7ce6c6;
+}
+
+.act-gebr{
+    width: 160px;
+}
+
+.negatief-result{
+    color: green;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.positief-result{
+    color: red;
+    text-transform: capitalize;
+    font-weight: bold;
 }

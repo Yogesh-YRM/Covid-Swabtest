@@ -50,7 +50,7 @@
          </div>
          <label for="" class="col-sm-2 col-form-label">Telefoon<r style="color:red;">*</r></label>
          <div class="col-sm-4">
-           <input type="text" name="phonenumber" class="form-control" id="telefoon" placeholder="">
+           <input type="text" name="phonenumber" class="form-control" id="telefoon" placeholder="" size="100">
          </div>
        </div>
        <div class="form-group row">
