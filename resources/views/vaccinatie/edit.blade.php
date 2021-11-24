@@ -46,6 +46,17 @@
                    </div>
                </div>
 
+                <div class="form-group row">
+                   <label for="inputMobiel" class="col-sm-2 col-form-label">Mobiel Nummer</label>
+                   <div class="col-sm-4">
+                     <input type="text" name="mobiel" class="form-control" value="{{ $data->mobiel }}">
+                   </div>
+                   <label for="inputAdress" class="col-sm-2 col-form-label">Adress</label>
+                   <div class="col-sm-4">
+                      <input type="text" name="adress" class="form-control" value="{{ $data->adress }}">
+                   </div>
+               </div>
+
                <div class="form-group row">
                     <label for="inputManufracture" class="col-sm-2 col-form-label">Manufracture</label>
                         <div class="col-sm-10">
