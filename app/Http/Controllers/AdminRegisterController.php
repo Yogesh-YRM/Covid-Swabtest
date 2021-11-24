@@ -114,8 +114,9 @@ class AdminRegisterController extends Controller
      */
     public function show($id)
     {
-        $reg = DB::table('registratie')->select('registratie.*','u.*','registratie.id as reg_id','registratie.created_at as reg_date')->where('status', '!=', "afgehandeld")
-        ->leftjoin('users as u','u.id','registratie.user_id')->where('registratie.id',$id)->get();
+        $reg = DB::table('registratie')->select('registratie.*','u.*','registratie.id as reg_id','registratie.created_at as reg_date','res.id as res_id','res.*')
+        ->leftjoin('users as u','u.id','registratie.user_id')
+        ->leftjoin('result as res','res.registration_id','registratie.id')->where('res.id',$id)->get();
         return view('adminregistratie.show')->with('reg', $reg[0]);
     }
 
