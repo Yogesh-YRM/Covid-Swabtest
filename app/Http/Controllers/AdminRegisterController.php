@@ -209,7 +209,7 @@ class AdminRegisterController extends Controller
 
         ################################ TEST KEYS #####################################
         $account_sid = 'AC5a9222e8258ab965b073b8df8a9211c7';
-        $auth_token = '386aba263b1be6996ecf641081f50c9e';
+        $auth_token = '12345678';
         $twilio_number = '+18143998410';
         $receiver = '+5978920264';
         ################################################################################
