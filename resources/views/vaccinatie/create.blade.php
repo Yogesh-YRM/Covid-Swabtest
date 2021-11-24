@@ -87,11 +87,12 @@
                         <input type="text" name="lot_number1" class="form-control" id="inputLot-Number1" placeholder="Lot Nummer 1">
                       </div>
                       <?php
-                      $today = date('Y-m-d H:i:s');
+                      $today = date('Y-m-d');
+                      // dd($today);
                       ?>
                       <div class="form-group col-md-4">
                         <label for="inputDate1">Vaccinatie Datum dose 1</label>
-                        <input type="date" name="date1" value="28-12-2000" class="form-control" id="inputDate1" placeholder="">
+                        <input type="date" name="date1" value="{{$today}}" class="form-control" id="inputDate1" placeholder="">
                       </div>
                       <div class="form-group col-md-4">
                          <label for="inputVaccinator1">Naam Vaccinator 1e dose</label>

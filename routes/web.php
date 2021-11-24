@@ -19,6 +19,7 @@ Route::get('/', function () {
 Route::resource('registeren','App\Http\Controllers\RegisterController');
 Route::post('pre_registration','App\Http\Controllers\RegisterController@preregister')->name('preregister');
 Route::get('result_pdf/{id}','App\Http\Controllers\RegisterController@result_pdf')->name('result_pdf');
+Route::get('vax_pdf/{id}','App\Http\Controllers\VaccinationController@vax_pdf')->name('vax_pdf');
 
 Route::group([
     'prefix'=>config('admin.prefix'),

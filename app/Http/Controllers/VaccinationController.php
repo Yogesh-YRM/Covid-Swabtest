@@ -94,7 +94,7 @@ class VaccinationController extends Controller
                                 'created_at' => date('Y-m-d H:i:s')
                             ]);
 
-$smsresult = DB::table('vaccinatie as r')->select('r.*','u.*')
+$smsresult = DB::table('vaccinatie as r')->select('r.*','u.*','r.id as vaxid')
                                                    ->leftjoin('users as u','u.id','r.user_id')
                                                    ->where('u.id_nummer', $input['id_number'])->get();
                                                ################################ LIVE KEYS #####################################
@@ -119,7 +119,7 @@ $smsresult = DB::table('vaccinatie as r')->select('r.*','u.*')
                                                    $receiver,
                                                    array(
                                                        'from' => $twilio_number,
-                                                       'body' => 'Beste ' . $smsresult[0]->achternaam . ', U bent gevaccineerd. Het bewijs vindt u op de volgende link team13.app.sr/result_pdf/' . $smsresult[0]->id_nummer
+                                                       'body' => 'Beste ' . $smsresult[0]->achternaam . ', U bent gevaccineerd. Het bewijs vindt u op de volgende link https://team13.app.sr/vax_pdf/' . $smsresult[0]->vaxid
 
                                                    )
                                                );
@@ -178,7 +178,7 @@ $smsresult = DB::table('vaccinatie as r')->select('r.*','u.*')
                                                    $receiver,
                                                    array(
                                                        'from' => $twilio_number,
-                                                       'body' => 'Beste ' . $smsresult[0]->achternaam . ', U bent gevaccineerd. Het bewijs vindt u op de volgende link team13.app.sr/result_pdf/' . $smsresult[0]->id_nummer
+                                                       'body' => 'Beste ' . $smsresult[0]->achternaam . ', U bent gevaccineerd. Het bewijs vindt u op de volgende link team13.app.sr/vax_pdf/' . $smsresult[0]->vaxid
 
                                                    )
                                                );
@@ -322,5 +322,12 @@ $smsresult = DB::table('vaccinatie as r')->select('r.*','u.*')
         $data->delete();
 
         return redirect()->route('vaccinatie.index')->with('success', 'Gebruiker succesvol verwijderd.');
+    }
+    public function vax_pdf($id)
+    {
+        $data = DB::table('vaccinatie as v')->select('v.*','u.*','v.created_at as vax_date','v.id as vax_id')
+        ->leftjoin('users as u','u.id','v.user_id')
+        ->where('v.id',$id)->get();
+    return view('vaccinatie.vaxpdf')->with('data',$data[0]);
     }
 }
