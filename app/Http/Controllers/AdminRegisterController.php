@@ -47,14 +47,14 @@ class AdminRegisterController extends Controller
         $input = $request->all();
 
         $users = DB :: table('users')->select('*')->get();
-       
+
         $array = json_decode($users);
         $match_string =$input['id_number'];
         $found = false;
         foreach ($array as $data) {
             if ($found) {
-                
-                        } 
+
+                        }
                         else if ($data->id_nummer === $match_string) {
                         $found = true;
                         $users = DB :: table('users')->select('*')->where('id_nummer',$input['id_number'])->get();
@@ -89,8 +89,8 @@ class AdminRegisterController extends Controller
                                     'email' =>$input['email'],
                                     'created_at' =>date('Y-m-d H:i:s')
                                 ]);
-                        
-                    
+
+
                                 $reg = DB::table('registratie')->insertgetId([
                                     'user_id' => $user,
                                     'opmerking' => $input['symptoms'],
@@ -212,7 +212,7 @@ class AdminRegisterController extends Controller
         $account_sid = 'AC5a9222e8258ab965b073b8df8a9211c7';
         $auth_token = '12345678';
         $twilio_number = '+18143998410';
-        $receiver = '+5978920264';
+        $receiver = '+5978968001';
         ################################################################################
 
 
