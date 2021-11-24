@@ -68,7 +68,7 @@ $location = DB::table('locations')->select('*')->get();
       <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label">Telefoon<r style="color:red;">*</r></label>
         <div class="col-sm-10">
-          <input type="text" name="phonenumber" class="form-control" size="100" id="phone" placeholder="">
+          <input type="text" name="phonenumber" class="form-control" size="120" id="phone" placeholder="">
         </div>
       </div>
       <div class="form-group row">
