@@ -46,7 +46,7 @@
 
 
 
-     <table class="table table-bordered" id = "myTable">
+     <table class="table table-bordered res-o-table" id = "myTable">
          <tr>
              <th>Datum resultaat</th>
              <th>ID-nummer</th>

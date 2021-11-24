@@ -1,5 +1,6 @@
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/custom/stylesheet.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -19,10 +20,10 @@
     <h2 class="header" style = " text-align: center; font-size: 50px; font-family: Verdana, Geneva, Tahoma, sans-serif;border-bottom:20px solid green;
             text-align: center;";>PCR Resultaat</h2>
 </div>
-    <div id="" style = "text-align:center;"><img src="{{asset($result->qr_code)}}"  alt="qrcode"></div>
+    <div id="" class = "pdf-qr" style = "text-align:center;"><img src="{{asset($result->qr_code)}}"  alt="qrcode"></div>
     
 
-        <table class="table ">
+        <table class="table pdf-table">
             <tr>
                 <th>Naam:</th>
                 <td>{{$result->voornaam}}</td>
@@ -33,7 +34,7 @@
                 <th>Datum Resultaat:</th>
                 <td>{{$result->res_date}}</td>
                 <th>Resultaat</th>
-                <td>{{$result->result}}</td>
+                <td class="{{$result->result}}-result">{{$result->result}}</td>
             </tr>
     </table>
     <div style = "text-align:center;">
@@ -41,7 +42,6 @@
    Team 13 <br>
    Suriname <br>
     Paramaribo<br><br>
-    <strong>Geldig tot: 20-05-2021</strong>
    </p>
     </div>
     </div>

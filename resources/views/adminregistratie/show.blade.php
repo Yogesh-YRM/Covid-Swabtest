@@ -15,7 +15,7 @@ $bp = json_decode($reg->bp);
 $vax = json_decode($reg->vax);
 
 ?>
-<table class="table table-bordered">
+<table class="table table-bordered show-reg">
          <tr>
              <th>ID-nummer</th>
              <td>{{$reg->id_nummer}}</td>

@@ -93,3 +93,48 @@
     text-transform: capitalize;
     font-weight: bold;
 }
+
+.show-reg tr th{
+    border: 1px solid #1557247a !important;
+    background-color: #dff0d8;
+}
+
+.show-reg tr td{
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.show-reg tr{
+    background-color: #f4f6f9!important;
+    color: #000 !important;
+}
+
+.pdf-qr img{
+    width: 80vw;
+    max-width: 450px;
+}
+
+.pdf-table{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 700px;
+}
+
+.pdf-table th{
+    border: 1px solid #1557247a !important;
+    background-color: #dff0d8 !important;
+}
+
+.pdf-table td{
+    border-top: 1px solid #dbdbdb !important;
+    border-bottom: 1px solid #dbdbdb !important;
+    border-right: 1px solid #dbdbdb !important;
+}
+
+.reg-o-table{
+    margin-top: -18px;
+}
+
+.res-o-table{
+    margin-top: -33px;
+}
