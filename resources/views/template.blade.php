@@ -19,7 +19,7 @@
 <body>
 
     {{-- navbar--}}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #324960!important;">
         <div class="container">
             <a class="navbar-brand" href="#">{{ config('app.name') }}</a>
             <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse">

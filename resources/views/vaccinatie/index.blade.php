@@ -22,15 +22,14 @@
      @endif
 
      <table class="table table-bordered">
-         <tr>
-             <th>NO</th>
-             <th>VOORNAAM</th>
-             <th>ACHTERNAAM</th>
-             <th>GEBOORTE DATUM</th>
-             <th>ID-NUMMER</th>
-             <th>FABRIKANT</th>
-             <th>STATUS</th>
-             <th>ACTION</th>
+         <tr><th>No</th>
+             <th>Voornaam</th>
+             <th>Aachternaam</th>
+             <th>Geboorte Datum</th>
+             <th>ID-Nummer</th>
+             <th>Fabrikant</th>
+             <th>Status</th>
+             <th >Action</th>
          </tr>
          @foreach ($data as $key => $value)
          <tr>

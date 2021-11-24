@@ -39,7 +39,8 @@
                  @if($reg->status == "preregistratie")
                         <a class="btn btn-primary" href= "{{route('adminregistratie.edit',[$reg->reg_id])}}">Registreer</a>
                         @elseif($reg->status == "geregistreerd")
-                        <a class="btn btn-success" href= "{{route('adminregistratie.show',[$reg->reg_id])}}">Bezichtigen</a>
+                        <a class="btn btn-info" href= "{{route('adminregistratie.show',[$reg->reg_id])}}">
+                        <i class="bi bi-eye"></i></a>
                         @endif
              </td>
              <td>

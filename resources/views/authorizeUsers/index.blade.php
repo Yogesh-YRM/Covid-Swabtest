@@ -28,7 +28,7 @@
              <th>Achternaam</th>
              <th>Email</th>
              <th>Rol</th>
-             <th width="280px">Action</th>
+             <th width="120px">Action</th>
          </tr>
          @foreach ($data as $key => $value)
          <tr>

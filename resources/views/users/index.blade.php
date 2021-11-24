@@ -23,12 +23,12 @@
 
      <table class="table table-bordered">
          <tr>
-             <th>NO</th>
-             <th>VOORNAAM</th>
-             <th>ACHTERNAAM</th>
-             <th>GEBOORTE DATUM</th>
-             <th>ID-NUMMER</th>
-             <th>ACTION</th>
+             <th>No</th>
+             <th>Voornaam</th>
+             <th>Achternaam</th>
+             <th>Geboorte Datum</th>
+             <th>ID-Nummer</th>
+             <th class = "act-gebr">Action</th>
           {{--  <th>OPTIES</th> --}}
          </tr>
          @foreach ($data as $key => $value)
