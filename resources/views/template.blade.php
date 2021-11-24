@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>{{ config('app.name') }}</title>
+    <title>C-19MS</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,7 +21,7 @@
     {{-- navbar--}}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #324960!important;">
         <div class="container">
-            <a class="navbar-brand" href="/authorize">{{ config('app.name') }}</a>
+            <a class="navbar-brand" href="/authorize">C-19MS</a>
             <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse">
                 <span class="navbar-toggler-icon"></span>
             </button>

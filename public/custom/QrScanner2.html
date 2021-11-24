@@ -269,7 +269,7 @@
                         document.getElementsByClassName('modal-content-wrong')[0].style.visibility = 'hidden';
                     }
 
-                    if (res[0].pcr_valid && res[0].pcr_status == 'valid') {
+                    if (res[0].pcr_valid && res[0].pcr_status == 'valid' && res[0].result == "negatief") {
                         document.getElementById('myModalcont').innerHTML = '<div class="header"><img src="https://team13.app.sr/right.png"><p><b>Geldige QR-code</b></p></div><div class="body"><table><tr><td><b>Voornaam:</b></td><td>' + res[0].voornaam + '</td></tr><tr><td><b>Achternaam:</b></td><td>' + res[0].achternaam + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_nummer + '</td></tr><tr><td><b>PCR Resultaat:</b></td><td>' + res[0].result + '</td></tr></table><p><b>PCR geldig tot:</b><br>' + res[0].pcr_valid + '</p><button class="closeModal">Scan Volgende</button></div>'
                         document.getElementsByClassName('modal-content-wrong')[0].style.visibility = 'hidden';
                     }
@@ -277,6 +277,12 @@
                         document.getElementById('myModalcontWrong').innerHTML = '<div class="header"><img src="https://team13.app.sr/wrong.png"><p><b>Geen geldige QR-code</b></p></div><div class="body"><p>De bezoeker heeft geen geldige negatief testbewijs</p><button class="closeModal">Scan Volgende</button></div>'
                         document.getElementsByClassName('modal-content')[0].style.visibility = 'hidden';
                     }
+
+                    else if (res[0].pcr_valid && res[0].result == "positief") {
+                        document.getElementById('myModalcontWrong').innerHTML = '<div class="header"><img src="https://team13.app.sr/wrong.png"><p><b>Geen geldige QR-code</b></p></div><div class="body"><table><tr><td><b>Voornaam:</b></td><td>' + res[0].voornaam + '</td></tr><tr><td><b>Achternaam:</b></td><td>' + res[0].achternaam + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_nummer + '</td></tr><tr><td><b>PCR Resultaat:</b></td><td>' + res[0].result + '</td></tr></table><p><b>PCR geldig tot:</b><br>' + res[0].pcr_valid + '</p><button class="closeModal">Scan Volgende</button></div>'
+                        document.getElementsByClassName('modal-content')[0].style.visibility = 'hidden';
+                    }
+
                     var button = document.getElementsByClassName("closeModal")[0];
                     button.onclick = function () {
                         modal.style.display = "none";
