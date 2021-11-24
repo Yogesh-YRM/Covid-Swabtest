@@ -280,19 +280,23 @@
                     var button = document.getElementsByClassName("closeModal")[0];
                     button.onclick = function () {
                         modal.style.display = "none";
+                        window.location.reload();
                     }
                 })
                 .catch(error => {
                     console.log('error', error)
-                    // wrong
-                    modal.style.display = "block";
+                    if (error) {
+                        modal.style.display = "block";
 
-                    document.getElementById('myModalcontWrong').innerHTML = '<div class="header"><img src="https://team13.app.sr/wrong.png"><p><b>Geen geldige QR-code</b></p></div><div class="body"><p>De bezoeker heeft geen geldige negatief testbewijs</p><button class="closeModal">Scan Volgende</button></div>'
-                    document.getElementsByClassName('modal-content')[0].style.visibility = 'hidden';
-                    var button = document.getElementsByClassName("closeModal")[0];
-                    button.onclick = function () {
-                        modal.style.display = "none";
+                        document.getElementById('myModalcontWrong').innerHTML = '<div class="header"><img src="https://team13.app.sr/wrong.png"><p><b>Geen geldige QR-code</b></p></div><div class="body"><p>De bezoeker heeft geen geldige negatief testbewijs</p><button class="closeModal">Scan Volgende</button></div>'
+                        document.getElementsByClassName('modal-content')[0].style.visibility = 'hidden';
+                        var button = document.getElementsByClassName("closeModal")[0];
+                        button.onclick = function () {
+                            modal.style.display = "none";
+                            window.location.reload();
+                        }
                     }
+
                 });
         },
         (errorMessage) => {
@@ -312,6 +316,7 @@
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            window.location.reload();
         }
     }
 </script>
