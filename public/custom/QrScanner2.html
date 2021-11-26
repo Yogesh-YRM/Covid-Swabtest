@@ -238,21 +238,41 @@
                     console.log(res)
                     modal.style.display = "block";
 
-                    if (res[0].date1 != null && res[0].date2 == null && res[0].date3 == null && res[1].result != null) {
+                    if (res[0].date1 != null && res[0].date2 == null && res[0].date3 == null && res[1].result == "negatief") {
                         vacStatus = "Eerste prik gevaccineerd"
                         document.getElementById('myModalcont').innerHTML = '<div class="header"><img src="https://team13.app.sr/right.png"><p><b>Geldige QR-code</b></p></div><div class="body"><table><tr><td><b>Voornaam:</b></td><td>' + res[0].voornaam + '</td></tr><tr><td><b>Achternaam:</b></td><td>' + res[0].achternaam + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_nummer + '</td></tr></table><p><b>Vaccinatie status:</b><br>' + vacStatus + '</p><table><tr><td><b>PCR Resultaat:</b></td><td>' + res[1].result + '</td></tr><tr><td><b>Datum PCR:</b></td><td>' + res[1].prc_date + '</td></tr></table><p></p><button class="closeModal">Scan Volgende</button></div>'
                         document.getElementsByClassName('modal-content-wrong')[0].style.visibility = 'hidden';
                     }
-                    else if (res[0].date1 != null && res[0].date2 != null && res[0].date3 == null && res[1].result != null) {
+                    else if (res[0].date1 != null && res[0].date2 != null && res[0].date3 == null && res[1].result == "negatief") {
                         vacStatus = "Volledig gevaccineerd"
                         document.getElementById('myModalcont').innerHTML = '<div class="header"><img src="https://team13.app.sr/right.png"><p><b>Geldige QR-code</b></p></div><div class="body"><table><tr><td><b>Voornaam:</b></td><td>' + res[0].voornaam + '</td></tr><tr><td><b>Achternaam:</b></td><td>' + res[0].achternaam + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_nummer + '</td></tr></table><p><b>Vaccinatie status:</b><br>' + vacStatus + '</p><table><tr><td><b>PCR Resultaat:</b></td><td>' + res[1].result + '</td></tr><tr><td><b>Datum PCR:</b></td><td>' + res[1].prc_date + '</td></tr></table><p></p><button class="closeModal">Scan Volgende</button></div>'
                         document.getElementsByClassName('modal-content-wrong')[0].style.visibility = 'hidden';
                     }
-                    else if (res[0].date1 != null && res[0].date2 != null && res[0].date3 != null && res[1].result != null) {
+                    else if (res[0].date1 != null && res[0].date2 != null && res[0].date3 != null && res[1].result == "negatief") {
                         vacStatus = "Volledig gevaccineerd + Booster"
                         document.getElementById('myModalcont').innerHTML = '<div class="header"><img src="https://team13.app.sr/right.png"><p><b>Geldige QR-code</b></p></div><div class="body"><table><tr><td><b>Voornaam: </b></td><td>' + res[0].voornaam + '</td></tr><tr><td><b>Achternaam:</b></td><td>' + res[0].achternaam + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_nummer + '</td></tr></table><p><b>Vaccinatie status:</b><br>' + vacStatus + '</p><table><tr><td><b>PCR Resultaat:</b></td><td>' + res[1].result + '</td></tr><tr><td><b>Datum PCR:</b></td><td>' + res[1].prc_date + '</td></tr></table><p></p><button class="closeModal">Scan Volgende</button></div>'
                         document.getElementsByClassName('modal-content-wrong')[0].style.visibility = 'hidden';
                     }
+
+
+                    if (res[0].date1 != null && res[0].date2 == null && res[0].date3 == null && res[1].result == "positief") {
+                        vacStatus = "Eerste prik gevaccineerd"
+                        document.getElementById('myModalcontWrong').innerHTML = '<div class="header"><img src="https://team13.app.sr/wrong.png"><p><b>Geen geldige QR-code</b></p></div><div class="body"><table><tr><td><b>Voornaam:</b></td><td>' + res[0].voornaam + '</td></tr><tr><td><b>Achternaam:</b></td><td>' + res[0].achternaam + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_nummer + '</td></tr><tr><td><b>PCR Resultaat:</b></td><td>' + res[0].result + '</td></tr></table><p><b>PCR geldig tot:</b><br>' + res[0].pcr_valid + '</p><button class="closeModal">Scan Volgende</button></div>'
+                        document.getElementsByClassName('modal-content')[0].style.visibility = 'hidden';
+                    }
+                    else if (res[0].date1 != null && res[0].date2 != null && res[0].date3 == null && res[1].result == "positief") {
+                        vacStatus = "Volledig gevaccineerd"
+                        document.getElementById('myModalcontWrong').innerHTML = '<div class="header"><img src="https://team13.app.sr/wrong.png"><p><b>Geen geldige QR-code</b></p></div><div class="body"><table><tr><td><b>Voornaam:</b></td><td>' + res[0].voornaam + '</td></tr><tr><td><b>Achternaam:</b></td><td>' + res[0].achternaam + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_nummer + '</td></tr><tr><td><b>PCR Resultaat:</b></td><td>' + res[0].result + '</td></tr></table><p><b>PCR geldig tot:</b><br>' + res[0].pcr_valid + '</p><button class="closeModal">Scan Volgende</button></div>'
+                        document.getElementsByClassName('modal-content')[0].style.visibility = 'hidden';
+                    }
+                    else if (res[0].date1 != null && res[0].date2 != null && res[0].date3 != null && res[1].result == "positief") {
+                        vacStatus = "Volledig gevaccineerd + Booster"
+                        document.getElementById('myModalcontWrong').innerHTML = '<div class="header"><img src="https://team13.app.sr/wrong.png"><p><b>Geen geldige QR-code</b></p></div><div class="body"><table><tr><td><b>Voornaam:</b></td><td>' + res[0].voornaam + '</td></tr><tr><td><b>Achternaam:</b></td><td>' + res[0].achternaam + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_nummer + '</td></tr><tr><td><b>PCR Resultaat:</b></td><td>' + res[0].result + '</td></tr></table><p><b>PCR geldig tot:</b><br>' + res[0].pcr_valid + '</p><button class="closeModal">Scan Volgende</button></div>'
+                        document.getElementsByClassName('modal-content')[0].style.visibility = 'hidden';
+                    }
+
+
+
                     else if (res[0].date1 != null && res[0].date2 == null && res[0].date3 == null && res[1].result == null) {
                         vacStatus = "Eerste prik gevaccineerd"
                         document.getElementById('myModalcont').innerHTML = '<div class="header"><img src="https://team13.app.sr/right.png"><p><b>Geldige QR-code</b></p></div><div class="body"><table><tr><td><b>Voornaam:</b></td><td>' + res[0].voornaam + '</td></tr><tr><td><b>Achternaam:</b></td><td>' + res[0].achternaam + '</td></tr><tr><td><b>ID nummer:<b></td><td> ' + res[0].id_nummer + '</td></tr></table><p><b>Vaccinatie status:</b><br>' + vacStatus + '</p><button class="closeModal">Scan Volgende</button></div>'

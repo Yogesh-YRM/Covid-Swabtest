@@ -40,11 +40,11 @@ class ApiController extends Controller
                $pcr = [];
             } else if ($pcr != null) {
 
-               if ($pcr->result == 'positief') {
-                  $user = [];
-                  return response()->json($user);
-                  exit();
-               }
+               // if ($pcr->result == 'positief') {
+               //    $user = [];
+               //    return response()->json($user);
+               //    exit();
+               // }
             }
 
             $user = array(
